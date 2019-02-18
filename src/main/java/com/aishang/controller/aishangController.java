@@ -1,6 +1,9 @@
 package com.aishang.controller;
 
+import com.aishang.po.Category;
+import com.aishang.service.ICategoryService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -14,9 +17,12 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/aishang")
 public class aishangController {
-
+    @Resource
+    private ICategoryService categoryService;
     @RequestMapping("index")
-    public String index(){
+    public String index(Model model){
+
+        model.addAttribute("category","category");
         return "index";
     }
 }
