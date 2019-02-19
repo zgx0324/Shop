@@ -1,8 +1,11 @@
 package com.aishang.service.impl;
 
+import com.aishang.mapper.CategoryMapper;
 import com.aishang.po.Category;
 import com.aishang.service.ICategoryService;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -11,12 +14,18 @@ import java.util.List;
  * @Description:
  *      一级类目Service层（ICategoryService接口）实现类
  */
-
+@Service("categoryService")
 public class CategoryServiceImpl implements ICategoryService {
+
+    @Resource
+    private CategoryMapper categoryMapper;
 
     // 返回一级类目列表集合
     @Override
     public List<Category> findAll() {
-        return null;
+
+        List<Category> categoryList = categoryMapper.findAll();
+
+        return categoryList;
     }
 }

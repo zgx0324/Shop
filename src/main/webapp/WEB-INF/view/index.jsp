@@ -188,504 +188,32 @@
 <div class="nav-box">
     <div class="nav-kuai w1200">
         <div class="nav-kuaijie f-l">
-            <a href="JavaScript:;" class="kj-tit1">商品分类快捷</a>
+            <a href="JavaScript:;" class="kj-tit1" >商品分类快捷</a>
             <div class="kuaijie-box">
-                <div class="kuaijie-info">
-                    <dl class="kj-dl1">
-                        <dt><img src="${pageContext.request.contextPath}/images/zl2-07.gif" /><a href="搜索列表(有品牌).html">食品/饮料/酒水</a></dt>
-                        <dd>
-                            <a href="搜索列表(有品牌).html">饼干糕点</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">冲调保健</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">酒水</a>
-                        </dd>
-                    </dl>
-                    <div class="kuaijie-con">
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
+                <c:forEach items="${categoryList}" var="category">
+                    <div class="kuaijie-info">
+                        <dl class="kj-dl1">
+                            <dt><img src="${pageContext.request.contextPath}/images/zl2-09.gif" /><a href="搜索列表(有品牌).html">${category.cname}</a></dt>
                         </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2" style="display:inline-block">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <div style="clear:both;"></div>
+                        <div class="kuaijie-con">
+                            <c:forEach items="${categorySecondMap[category.cid]}" var="categorySecond">
+                                <dl class="kj-dl2" style="display:inline-block">
+                                    <dt><a href="搜索列表(有品牌).html">${categorySecond.csname}</a></dt>
+                                    <dd>
+                                        <c:forEach items="${categorySecond.categoryThirdList}" var="categoryThird" varStatus="vs">
+                                            <a href="搜索列表(有品牌).html">${categoryThird.ctname}</a><c:if test="${!vs.last}"><span>|</span></c:if>
+                                        </c:forEach>
+                                    </dd>
+                                </dl>
+                            </c:forEach>
+                            <div style="clear:both;"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="kuaijie-info">
-                    <dl class="kj-dl1">
-                        <dt><img src="${pageContext.request.contextPath}/images/zl2-08.gif" /><a href="搜索列表(有品牌).html">粮油副食</a></dt>
-                        <dd>
-                            <a href="搜索列表(有品牌).html">厨房调味</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">大米/面粉</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">方便速食</a>
-                        </dd>
-                    </dl>
-                    <div class="kuaijie-con">
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="kuaijie-info">
-                    <dl class="kj-dl1">
-                        <dt><img src="${pageContext.request.contextPath}/images/zl2-09.gif" /><a href="搜索列表(有品牌).html">家庭清洁</a></dt>
-                        <dd>
-                            <a href="搜索列表(有品牌).html">厨房清洁</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">纸品湿巾</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">家私</a>
-                        </dd>
-                    </dl>
-                    <div class="kuaijie-con">
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="kuaijie-info">
-                    <dl class="kj-dl1">
-                        <dt><img src="${pageContext.request.contextPath}/images/zl2-10.gif" /><a href="搜索列表(有品牌).html">美妆洗护/个人护理</a></dt>
-                        <dd>
-                            <a href="搜索列表(有品牌).html">洗浴用品/身体护理</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">洗发护发</a>
-                        </dd>
-                    </dl>
-                    <div class="kuaijie-con">
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="kuaijie-info">
-                    <dl class="kj-dl1">
-                        <dt><img src="${pageContext.request.contextPath}/images/zl2-11.gif" /><a href="搜索列表(有品牌).html">母婴用品/玩具</a></dt>
-                        <dd>
-                            <a href="搜索列表(有品牌).html">宝宝喂养/洗护清洁</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">玩具</a><span>|</span>
-                            <a href="搜索列表(有品牌).html">奶粉/辅食</a>
-                        </dd>
-                    </dl>
-                    <div class="kuaijie-con">
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
-                <div class="kuaijie-info">
-                    <dl class="kj-dl1">
-                        <dt><img src="${pageContext.request.contextPath}/images/zl2-12.gif" /><a href="搜索列表(有品牌).html">家居/家电</a></dt>
-                    </dl>
-                    <div class="kuaijie-con">
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <dl class="kj-dl2">
-                            <dt><a href="搜索列表(有品牌).html">洗浴用品/身体护理</a></dt>
-                            <dd>
-                                <a href="搜索列表(有品牌).html">护手霜</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">香皂</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">沐浴露</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">花露水</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">泡浴/盐浴</a><span>|</span>
-                                <a href="搜索列表(有品牌).html">洗手液</a>
-                            </dd>
-                        </dl>
-                        <div style="clear:both;"></div>
-                    </div>
-                </div>
+                </c:forEach>
+
+
+
+
             </div>
         </div>
         <ul class="nav-font f-l">
@@ -2169,7 +1697,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-61.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-61.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">Viceroy维丝瑞女子spa会所</a>
@@ -2185,7 +1713,7 @@
             <ul class="zl-rul1 lihover">
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-61.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-61.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">Viceroy维丝瑞女子spa会所</a>
@@ -2198,7 +1726,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-62.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-62.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">魁美胸护理中心</a>
@@ -2211,7 +1739,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-64.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-64.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">欧皇美容养生</a>
@@ -2224,7 +1752,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-65.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-65.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">优肤美颜护理中心</a>
@@ -2237,7 +1765,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-61.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-61.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">Viceroy维丝瑞女子spa会所</a>
@@ -2250,7 +1778,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-63.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-63.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">A+1SPA</a>
@@ -2266,7 +1794,7 @@
             <ul class="zl-rul1 lihover">
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-61.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-61.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">Viceroy维丝瑞女子spa会所</a>
@@ -2279,7 +1807,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-61.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-61.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">Viceroy维丝瑞女子spa会所</a>
@@ -2292,7 +1820,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-62.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-62.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">魁美胸护理中心</a>
@@ -2305,7 +1833,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-63.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-63.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">A+1SPA</a>
@@ -2318,7 +1846,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-65.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-65.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">优肤美颜护理中心</a>
@@ -2331,7 +1859,7 @@
                 </li>
                 <li>
                     <div class="sy-tu1">
-                        <a href="#"><img src="images/zl2-64.png" /></a>
+                        <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-64.png" /></a>
                     </div>
                     <div class="sy-tit1">
                         <a href="#">欧皇美容养生</a>

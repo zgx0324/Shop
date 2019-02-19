@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aishang.mapper.CategorySecondMapper">
+
+    <resultMap id="categorySecondExtMap" type="com.aishang.po.CategorySecondExt">
+        <id column="csid" property="csid"/>
+        <result column="csname" property="csname"/>
+        <result column="cid" property="cid"/>
+        <collection property="categoryThirdList" ofType="com.aishang.po.CategoryThird">
+            <id column="ctid" property="ctid"/>
+            <result column="ctname" property="ctname"/>
+            <result column="csid" property="csid"/>
+        </collection>
+    </resultMap>
+    <select id="findAllByCid" resultMap="categorySecondExtMap" parameterType="Integer">
+         select * from category_second inner join category_third on category_second.csid = category_third.csid where cid=#{cid}
+    </select>
+</mapper>
