@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aishang.po.Product;
-import com.aishang.service.IProductService;
+import com.aishang.service.ProductService;
 
 @Controller
 @RequestMapping("/product")
@@ -17,14 +17,8 @@ public class ProductController {
 
     //注入service对象,根据类型来注入
     @Resource
-    private IProductService productService;
+    private ProductService productService;
 
-    //查询所有商品
-    @RequestMapping("list")
-    public String list(Model model){
-        List<Product> list = productService.findAll();
-        model.addAttribute("productlist", list);
-        return "register";
-    }
+
 
 }

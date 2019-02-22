@@ -1,9 +1,8 @@
 package com.aishang.service.impl;
 
 import com.aishang.mapper.CategorySecondMapper;
-import com.aishang.po.CategorySecond;
 import com.aishang.po.CategorySecondExt;
-import com.aishang.service.ICategorySecondService;
+import com.aishang.service.CategorySecondService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,7 +15,7 @@ import java.util.List;
  *      二级类目Service层（ICategoryService接口）实现类
  */
 @Service("categorySecondService")
-public class CategorySecondServiceImpl implements ICategorySecondService {
+public class CategorySecondServiceImpl implements CategorySecondService {
 
     @Resource
     private CategorySecondMapper categorySecondMapper;

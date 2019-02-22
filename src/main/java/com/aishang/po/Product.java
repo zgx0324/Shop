@@ -1,18 +1,43 @@
 package com.aishang.po;
 
 import java.util.Date;
-
+// TODO 商品po类
 public class Product {
 
     private Integer pid;
-    private String pname;
-    private Double market_price;
-    private Double shop_price;
-    private String image;
-    private String pdesc;
-    private Integer is_hot;
-    private Date pdate;
-    private Integer csid;
+    private String pName;
+    private Double marketPrice;
+    private Double shopPrice;
+    private String pDesc;
+    private Integer isHot;
+    private Date date;
+    private Integer ctid;
+    private Integer stock;
+    private Double score;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "pid=" + pid +
+                ", pName='" + pName + '\'' +
+                ", marketPrice=" + marketPrice +
+                ", shopPrice=" + shopPrice +
+                ", pDesc='" + pDesc + '\'' +
+                ", isHot=" + isHot +
+                ", date=" + date +
+                ", ctid=" + ctid +
+                ", stock=" + stock +
+                ", score=" + score +
+                '}';
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
 
     public Integer getPid() {
         return pid;
@@ -22,68 +47,70 @@ public class Product {
         this.pid = pid;
     }
 
-    public String getPname() {
-        return pname;
+    public String getpName() {
+        return pName;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 
-    public Double getMarket_price() {
-        return market_price;
+    public Double getMarketPrice() {
+        return marketPrice;
     }
 
-    public void setMarket_price(Double market_price) {
-        this.market_price = market_price;
+    public void setMarketPrice(Double marketPrice) {
+        this.marketPrice = marketPrice;
     }
 
-    public Double getShop_price() {
-        return shop_price;
+    public Double getShopPrice() {
+        return shopPrice;
     }
 
-    public void setShop_price(Double shop_price) {
-        this.shop_price = shop_price;
+    public void setShopPrice(Double shopPrice) {
+        this.shopPrice = shopPrice;
     }
 
-    public String getImage() {
-        return image;
+    public String getpDesc() {
+        return pDesc;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setpDesc(String pDesc) {
+        this.pDesc = pDesc;
     }
 
-    public String getPdesc() {
-        return pdesc;
+    public Integer getIsHot() {
+        return isHot;
     }
 
-    public void setPdesc(String pdesc) {
-        this.pdesc = pdesc;
+    public void setIsHot(Integer isHot) {
+        this.isHot = isHot;
     }
 
-    public Integer getIs_hot() {
-        return is_hot;
+    public Date getDate() {
+        return date;
     }
 
-    public void setIs_hot(Integer is_hot) {
-        this.is_hot = is_hot;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Date getPdate() {
-        return pdate;
+    public Integer getCtid() {
+        return ctid;
     }
 
-    public void setPdate(Date pdate) {
-        this.pdate = pdate;
+    public void setCtid(Integer ctid) {
+        this.ctid = ctid;
     }
 
-    public Integer getCsid() {
-        return csid;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setCsid(Integer csid) {
-        this.csid = csid;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
+
+
 
 }

@@ -2,7 +2,7 @@ package com.aishang.service;
 
 import com.aishang.po.User;
 
-public interface IUserService {
+public interface UserService {
     User doLogin(String userName,String passWord);
 
     User findUserName(String userName);

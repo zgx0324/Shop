@@ -2,7 +2,7 @@ package com.aishang.service.impl;
 
 import com.aishang.mapper.CategoryMapper;
 import com.aishang.po.Category;
-import com.aishang.service.ICategoryService;
+import com.aishang.service.CategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.List;
  *      一级类目Service层（ICategoryService接口）实现类
  */
 @Service("categoryService")
-public class CategoryServiceImpl implements ICategoryService {
+public class CategoryServiceImpl implements CategoryService {
 
     @Resource
     private CategoryMapper categoryMapper;

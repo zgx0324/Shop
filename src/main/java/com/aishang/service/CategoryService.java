@@ -1,8 +1,7 @@
 package com.aishang.service;
 
 import com.aishang.po.Category;
-import com.aishang.po.CategorySecond;
-import com.aishang.po.CategorySecondExt;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,8 +12,8 @@ import java.util.List;
  *          一级类目Service接口
  */
 
-public interface ICategorySecondService {
+public interface CategoryService {
 
     // 返回一级类目列表的函数
-    List<CategorySecondExt> findAllByCid(Integer cid);
+    List<Category> findAll();
 }

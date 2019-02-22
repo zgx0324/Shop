@@ -3,7 +3,7 @@ package com.aishang.controller;
 
 
 import com.aishang.po.User;
-import com.aishang.service.IUserService;
+import com.aishang.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 public class UserController {
 
     @Resource
-    private IUserService userService;
+    private UserService userService;
 
     @RequestMapping("/checkUserName")
     public void checkUserName(String userName,HttpServletResponse response) throws IOException {

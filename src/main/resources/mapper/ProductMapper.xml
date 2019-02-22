@@ -3,7 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aishang.mapper.ProductMapper">
-    <select id="findAll" resultType="com.aishang.po.Product">
-         select * from product
+    <select id="getProductByID" resultType="com.aishang.po.Product" parameterType="Integer" >
+         select pid,pname as pName,market_price as marketPrice,shop_price as shopPrice,ctid,stock,is_hot as isHot,
+                date
+         from product
+         where pid=#{pid}
+    </select>
+    <select id="getNewProduct" resultType="com.aishang.po.Product" parameterType="Integer" >
+            select pid,pname as pName,market_price as marketPrice,shop_price as shopPrice,stock,is_hot as isHot,date
+            from product
+            inner join category_third
+            on product.ctid=category_third.ctid
+            inner join category_second
+            on category_second.csid=category_third.csid
+            inner join category
+            on category.cid=category_second.cid
+            where category.cid=#{0}
+            limit #{1},#{2}
     </select>
 </mapper>

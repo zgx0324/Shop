@@ -1,19 +1,15 @@
 package com.aishang.controller;
 
 import com.aishang.po.User;
-import com.aishang.service.IUserService;
+import com.aishang.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -29,7 +25,7 @@ import java.util.regex.Pattern;
 public class DoLogin {
     //TODO 注入参数
     @Resource
-    private IUserService userService;
+    private UserService userService;
     @Resource
     private HttpSession session;
 
