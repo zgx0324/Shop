@@ -3,7 +3,7 @@ package com.aishang.service;
 import com.aishang.po.Category;
 import com.aishang.po.CategorySecondExt;
 import com.aishang.po.Product;
-import org.springframework.stereotype.Service;
+import com.aishang.po.ProductBean;
 
 import java.util.List;
 import java.util.Set;
@@ -50,4 +50,10 @@ public interface AishangService {
 
     // 根据一级类目查询最新上架的商品
     List<Product> getNewProduct(Integer cid, int start, int end);
+
+    //获取该类目下推荐商品集合
+    List<Product> getIsHotList(ProductBean productBean);
+
+    //获取该类目下商品集合
+    List<Product> categoryProductList(ProductBean productBean);
 }

@@ -1,6 +1,7 @@
 package com.aishang.dao;
 
 import org.springframework.stereotype.Repository;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
@@ -22,24 +23,26 @@ public class RedisDaoImpl implements RedisDao {
     // 得到下表从start到stop的Set列表数据
     @Override
     public Set<String> get(String key , long start, long stop) {
-        Set<String> zrange = jedisPool.getResource().zrange(key, start, stop);
-        jedisPool.getResource().close();
+        Jedis jedis = jedisPool.getResource();
+        Set<String> zrange = jedis.zrange(key, start, stop);
+        jedis.close();
         return zrange;
     }
 
     // 向数据中添加销量
     @Override
     public void set(String key, Double score, String member) {
-        jedisPool.getResource().zadd(key,score,member);
-        jedisPool.getResource().close();
+        Jedis jedis = jedisPool.getResource();
+        jedis.zadd(key,score,member);
+        jedis.close();
     }
 
     // 根据商品id获取销量
     @Override
     public Double getScoreByMember(String key ,String member){
-
-        Double zscore = jedisPool.getResource().zscore(key, member);
-        jedisPool.getResource().close();
+        Jedis jedis = jedisPool.getResource();
+        Double zscore = jedis.zscore(key, member);
+        jedis.close();
         return zscore;
     }
 

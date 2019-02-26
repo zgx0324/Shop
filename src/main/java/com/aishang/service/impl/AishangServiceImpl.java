@@ -5,6 +5,7 @@ import com.aishang.mapper.ProductMapper;
 import com.aishang.po.Category;
 import com.aishang.po.CategorySecondExt;
 import com.aishang.po.Product;
+import com.aishang.po.ProductBean;
 import com.aishang.service.CategorySecondService;
 import com.aishang.service.CategoryService;
 import com.aishang.service.AishangService;
@@ -80,7 +81,21 @@ public class AishangServiceImpl implements AishangService {
     // 根据一级类目查询最新上架的商品
     @Override
     public List<Product> getNewProduct(Integer cid, int start, int end) {
-        System.out.println("======================");
         return productMapper.getNewProduct(cid,start,end);
+    }
+
+    //获取该类目下推荐商品集合
+    @Override
+    public List<Product> getIsHotList(ProductBean productBean) {
+        return productMapper.getIsHotList(productBean);
+    }
+
+    //获取该类目下商品集合
+    @Override
+    public List<Product> categoryProductList(ProductBean productBean) {
+        // 得到该类目下商品总数
+        productBean.setTotalCount(productMapper.getToTalCount(productBean));
+        // 返回分页集合
+        return productMapper.categoryProductList(productBean);
     }
 }

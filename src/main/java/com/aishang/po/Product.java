@@ -1,6 +1,6 @@
 package com.aishang.po;
 
-import java.util.Date;
+
 // TODO 商品po类
 public class Product {
 
@@ -10,7 +10,7 @@ public class Product {
     private Double shopPrice;
     private String pDesc;
     private Integer isHot;
-    private Date date;
+    private String date;
     private Integer ctid;
     private Integer stock;
     private Double score;
@@ -87,11 +87,11 @@ public class Product {
         this.isHot = isHot;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
