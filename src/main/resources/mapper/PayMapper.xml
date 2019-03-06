@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aishang.mapper.PayMapper">
+
+    <select id="checkAccount" parameterType="String" resultType="Integer">
+        select count(0) from pay where bank_account=#{bankAccount}
+    </select>
+
+    <select id="checkPay" parameterType="Pay" resultType="Integer">
+        select pay_id as payId from pay where bank_account=#{bankAccount} and bank_pass=#{bankPass}
+    </select>
+
+</mapper>

@@ -18,6 +18,19 @@ public class Address {
     private Date date;
     private Integer uid;
 
+    @Override
+    public String toString() {
+        return "Address{" +
+                "aid=" + aid +
+                ", name='" + name + '\'' +
+                ", tel='" + tel + '\'' +
+                ", addr='" + addr + '\'' +
+                ", state=" + state +
+                ", date=" + date +
+                ", uid=" + uid +
+                '}';
+    }
+
     public Integer getAid() {
         return aid;
     }

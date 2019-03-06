@@ -1,7 +1,9 @@
 package com.aishang.service.impl;
 
+import com.aishang.mapper.AddressMapper;
 import com.aishang.mapper.ProductMapper;
 import com.aishang.dao.RedisDao;
+import com.aishang.po.Address;
 import com.aishang.po.Category;
 import com.aishang.po.CategorySecondExt;
 import com.aishang.po.Product;
@@ -24,6 +26,8 @@ public class ProductServiceImpl  implements ProductService {
     private CategoryService categoryService;
     @Resource
     private CategorySecondService categorySecondService;
+    @Resource
+    private AddressMapper addressMapper;
 
     //根据用户id查询用户信息
     @Override
@@ -53,5 +57,13 @@ public class ProductServiceImpl  implements ProductService {
             categorySecondMap.put(category.getCid(), categorySecondList);
         }
         return categorySecondMap;
+    }
+
+    //TODO 地址查询
+
+    // 根据用户id的查询地址集合列表
+    @Override
+    public List<Address> getAddressAll(Integer uid) {
+        return addressMapper.getAddressAll(uid);
     }
 }

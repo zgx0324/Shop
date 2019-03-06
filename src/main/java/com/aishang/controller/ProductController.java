@@ -27,15 +27,14 @@ public class ProductController {
     private ProductService productService;
     @Resource
     private HttpSession session;
-    @Resource
-    private AddressMapper addressMapper;
+
     // 去往商品详情页
     @RequestMapping("productDetail")
     public String productDetail(Model model,Product product){
 
         User user = (User) session.getAttribute("user");
 
-        model.addAttribute("addressList",addressMapper.getAddressAll(user.getUid()));//根据用户id向前台返回地址集合列表
+        model.addAttribute("addressList",productService.getAddressAll(user.getUid()));//根据用户id向前台返回地址集合列表
         model.addAttribute("productDetail",productService.getProductByID(product.getPid()));//商品详情的product对象
         model.addAttribute("categoryList", productService.findCategoryAll());//一级类目集合
         model.addAttribute("categorySecondMap", productService.categorySecondMap(productService.findCategoryAll()));//二级类目Map<Integer,List<CategorySecondExt>>集合

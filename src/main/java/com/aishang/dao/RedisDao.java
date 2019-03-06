@@ -1,5 +1,8 @@
 package com.aishang.dao;
 
+import com.aishang.po.OrderItem;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,4 +24,14 @@ public interface RedisDao {
     // 根据商品id获取销量
     Double getScoreByMember(String key ,String member);
 
+    //删除指定key的数据
+    void del(String string);
+
+    //添加订单项至购物车
+    void addBasket(String key, String value);
+
+    //得到某用户的购物车
+    String getBasket(String key);
+    //判断是否存在key
+    boolean existsKeys(String string);
 }

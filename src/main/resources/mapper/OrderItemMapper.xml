@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aishang.mapper.OrderItemMapper">
+    <!-- 添加订单项-->
+    <insert id="addOrderItem" parameterType="OrderItemExt">
+        insert into order_item values(default,#{pid},#{count},#{subTotal},#{oid},#{orderItemDate})
+    </insert>
+
+    <!-- 根据订单ID查询订单项集合-->
+    <select id="getOrderitemListByOid" resultType="OrderItemExt" parameterType="Integer">
+        select order_item_id as orderItemID,pid,count,sub_total as subTotal,oid,order_item_date as orderItemDate
+        from order_item
+        where oid=#{oid}
+    </select>
+
+</mapper>

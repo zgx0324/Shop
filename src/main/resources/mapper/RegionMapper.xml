@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aishang.mapper.RegionMapper">
+    <!--获得全国所有省份集合-->
+    <select id="getAllProvince" resultType="Region">
+        select id,region_name as regionName,region_type as regionType
+        from ecs_region
+        where region_type=1
+    </select>
+    <!--根据省份ID获取该省下属城市-->
+    <select id="getCityByProvinceID" resultType="Region" parameterType="Integer">
+        select id,region_name as regionName,region_type as regionType
+        from ecs_region
+        where parent_id=#{id}
+    </select>
+
+</mapper>

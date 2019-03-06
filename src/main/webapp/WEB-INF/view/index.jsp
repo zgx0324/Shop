@@ -29,7 +29,7 @@
         </p>
         <p class="hd-p2 f-r">
             <a href="index.html">返回首页 (个人中心)</a><span>|</span>
-            <a href="购物车.html">我的购物车</a><span>|</span>
+            <a href="${pageContext.request.contextPath}/order/toBasket.do">我的购物车</a><span>|</span>
             <a href="我的订单.html">我的订单</a>
         </p>
         <div style="clear:both;"></div>

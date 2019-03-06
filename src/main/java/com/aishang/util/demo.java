@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,10 @@ import java.util.regex.Pattern;
  */
 
 public class demo {
+    @Test
+    public void fun3(){
+        System.out.println(new Date().toString());
+    }
 
     @Test
     public void fun1(){

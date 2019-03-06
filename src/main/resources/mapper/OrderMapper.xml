@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aishang.mapper.OrderMapper">
+    <!-- 添加订单-->
+    <insert id="addOrder" parameterType="OrderExt">
+        insert into orders values(default,#{orderNumber},#{total},#{aid},#{payId},#{date},#{uid},default)
+    </insert>
+    <!--获取oid-->
+    <select id="getOid" parameterType="OrderExt" resultType="Integer">
+        select oid from orders where order_number=#{orderNumber} and uid=#{uid}
+    </select>
+    <!--根据单号查询订单-->
+    <select id="getOrderByOrderNumber" parameterType="OrderExt" resultType="Order">
+        select oid from orders where order_number=#{orderNumber}
+    </select>
+    <!--根据订单oid 查询并返回OrderExt对象-->
+    <select id="getOrderByoid" parameterType="Integer" resultType="OrderExt">
+        select oid,order_number as orderNumber,uid,date,pay_id as payId,aid,total
+        from orders where oid=#{oid}
+    </select>
+    <!--修改订单支付状态-->
+    <update id="updatePayIDByOid" parameterType="Order">
+        update orders set pay_id=#{payId},state=#{state} where oid=#{oid}
+    </update>
+</mapper>

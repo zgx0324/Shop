@@ -3,6 +3,7 @@ package com.aishang.service;
 import java.util.List;
 import java.util.Map;
 
+import com.aishang.po.Address;
 import com.aishang.po.Category;
 import com.aishang.po.CategorySecondExt;
 import com.aishang.po.Product;
@@ -21,5 +22,10 @@ public interface ProductService {
 
     // 获取二级类目map<cid,categorySecondList>集合
     Map<Integer, List<CategorySecondExt>> categorySecondMap(List<Category> categoryList);
+
+    //TODO 地址查询
+
+    // 根据用户id的查询地址集合列表
+    List<Address> getAddressAll(Integer uid);
 
 }

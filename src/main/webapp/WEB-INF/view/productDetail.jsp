@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,8 +22,8 @@
         $(function () {
             var num=1;
             $("#reduce").click(function () {
-                if(!(num >= 1)){
-                    alert("数量最少为1件")
+                if(num<=1){
+                    $("#num").val(1);
                 }else {
                     num=num-1
                     $("#num").val(num);
@@ -31,6 +32,37 @@
             $("#add").click(function () {
                 num=num+1;
                 $("#num").val(num);
+            })
+        })
+        $(function () {
+            //立即购买
+            $("#btn1").click(function () {
+                $("#productForm").attr("action","${pageContext.request.contextPath}/order/firmOrder.do");
+                $("#productForm").submit();
+            })
+            //加入购物车
+            $("#btn2").click(function () {
+               $.ajax({
+                   url:"${pageContext.request.contextPath}/order/addBasket.do",
+                   data:{
+                       pid:"${productDetail.pid}",
+                       aid:$("[name='aid']").val(),
+                       count:$("#num").val(),
+                       date:$("[name='date']").val()
+                   },
+                   success:function (msg) {
+                       if(msg=="ok"){
+                           alert("添加至购物车成功")
+                       }else{
+                           alert("添加至购物车失败")
+                       }
+
+                   }
+               })
+            })
+            //
+            $("#btn3").click(function () {
+
             })
         })
     </script>
@@ -257,39 +289,39 @@
         <div class="dt-if1-l f-l">
             <div class="dt-if1-datu">
                 <ul qie-da="">
-                    <li><a href="#"><img src="images/dt-if1-l-tuda1.gif" /></a></li>
-                    <li><a href="#"><img src="images/dt-if1-l-tuda2.gif" /></a></li>
-                    <li><a href="#"><img src="images/dt-if1-l-tuda3.gif" /></a></li>
-                    <li><a href="#"><img src="images/dt-if1-l-tuda4.gif" /></a></li>
-                    <li><a href="#"><img src="images/dt-if1-l-tuda5.gif" /></a></li>
-                    <li><a href="#"><img src="images/dt-if1-l-tuda6.gif" /></a></li>
-                    <li><a href="#"><img src="images/dt-if1-l-tuda7.gif" /></a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-l-tuda1.gif" /></a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-l-tuda2.gif" /></a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-l-tuda3.gif" /></a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-l-tuda4.gif" /></a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-l-tuda5.gif" /></a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-l-tuda6.gif" /></a></li>
+                    <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-l-tuda7.gif" /></a></li>
                     <div style="clear:both;"></div>
                 </ul>
             </div>
             <div class="dt-if1-qietu">
-                <a class="dt-qie-left f-l" href="JavaScript:;"><img src="images/dt-if1-qietu-left.gif" /></a>
+                <a class="dt-qie-left f-l" href="JavaScript:;"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu-left.gif" /></a>
                 <div class="dt-qie-con f-l">
                     <ul qie-xiao="">
-                        <li class="current"><a href="#"><img src="images/dt-if1-qietu1.gif" /></a></li>
-                        <li><a href="#"><img src="images/dt-if1-qietu2.gif" /></a></li>
-                        <li><a href="#"><img src="images/dt-if1-qietu3.gif" /></a></li>
-                        <li><a href="#"><img src="images/dt-if1-qietu4.gif" /></a></li>
-                        <li><a href="#"><img src="images/dt-if1-qietu5.gif" /></a></li>
-                        <li><a href="#"><img src="images/dt-if1-qietu6.gif" /></a></li>
-                        <li><a href="#"><img src="images/dt-if1-qietu7.gif" /></a></li>
+                        <li class="current"><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu1.gif" /></a></li>
+                        <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu2.gif" /></a></li>
+                        <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu3.gif" /></a></li>
+                        <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu4.gif" /></a></li>
+                        <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu5.gif" /></a></li>
+                        <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu6.gif" /></a></li>
+                        <li><a href="#"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu7.gif" /></a></li>
                         <div style="clear:both;"></div>
                     </ul>
                 </div>
-                <a class="dt-qie-right f-r" href="JavaScript:;"><img src="images/dt-if1-qietu-right.gif" /></a>
+                <a class="dt-qie-right f-r" href="JavaScript:;"><img src="${pageContext.request.contextPath}/images/dt-if1-qietu-right.gif" /></a>
             </div>
             <div class="dt-if1-fx">
                 <span>商品编码:128618586</span>
                 <p>分享到：<a href="#"><img src="${pageContext.request.contextPath}/images/dt-xl.gif" /></a><a href="#"><img src="${pageContext.request.contextPath}/images/dt-kj.gif" /></a><a href="#"><img src="${pageContext.request.contextPath}/images/dt-wx.gif" /></a></p>
             </div>
         </div>
-
-        <div class="dt-if1-m f-l">
+        <form action="#" method="post" id="productForm">
+            <div class="dt-if1-m f-l">
             <div class="dt-ifm-hd">
                 <h3><a href="#">${productDetail.pName}</a></h3>
             </div>
@@ -298,7 +330,7 @@
                     <dt>宅购价</dt>
                     <dd>
                         <p class="p1">
-                            <span class="sp1">${productDetail.marketPrice}</span><span class="sp2">${productDetail.shopPrice}</span>
+                            <span class="sp1"> <input type="hidden" name="singlePrice" value="${productDetail.marketPrice}">${productDetail.marketPrice}</span><span class="sp2">${productDetail.shopPrice}</span>
                         </p>
                         <p class="p2">
                             <span class="sp1">库存：${productDetail.stock} 件</span>
@@ -318,15 +350,16 @@
             <dl class="dt-ifm-box1">
                 <dt>送时</dt>
                 <dd>
-                    <input type="date"/>
+                    <input type="date" name="date"/>
                     <p>如果选择的送达日期在下单后的两天之内按默认时间送达呦！</p>
                 </dd>
+                   <input type="hidden" name="pid" value="${productDetail.pid}">
                 <div style="clear:both;"></div>
             </dl>
             <dl class="dt-ifm-box2">
                 <dt>送至</dt>
                 <dd>
-                    <select>
+                    <select name="aid">
                         <c:forEach items="${addressList}" var="address">
                             <option value="${address.aid}">${address.addr}</option>
                         </c:forEach>
@@ -339,18 +372,18 @@
                 <dt>数量</dt>
                 <dd>
                     <a class="box3-left" href="JavaScript:;" id="reduce">-</a>
-                    <input type="text" id="num" value="1">
+                    <input type="text" id="num" name="count" value="1" readonly>
                     <a class="box3-right" href="JavaScript:;" id="add">+</a>
                 </dd>
                 <div style="clear:both;"></div>
             </dl>
             <div class="dt-ifm-box4">
-                <button class="btn1">立即购买</button>
-                <button class="btn2">加入购物车</button>
-                <button class="btn3">收藏</button>
+                <button class="btn1" id="btn1">立即购买</button>
+                <button class="btn2" id="btn2" type="button">加入购物车</button>
+                <button class="btn3" id="btn3">收藏</button>
             </div>
         </div>
-
+        </form>
         <div class="dt-if1-r f-r">
             <div class="dt-ifr-hd">
                 <div class="dt-ifr-tit">

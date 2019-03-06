@@ -115,7 +115,11 @@
             <if test="selectMaxPrice!=null and selectMaxPrice!=''">
                 and market_price &lt;= #{selectMaxPrice}
             </if>
-
         </where>
     </select>
+
+    <!--下单成功更改库存-->
+    <update id="updateStock" parameterType="OrderItemExt">
+        update product set stock=stock-#{count} where pid=#{pid}
+    </update>
 </mapper>

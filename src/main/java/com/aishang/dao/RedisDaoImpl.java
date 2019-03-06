@@ -1,10 +1,13 @@
 package com.aishang.dao;
 
+import com.aishang.po.OrderItem;
+import com.aishang.util.JsonUtils;
 import org.springframework.stereotype.Repository;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -44,6 +47,39 @@ public class RedisDaoImpl implements RedisDao {
         Double zscore = jedis.zscore(key, member);
         jedis.close();
         return zscore;
+    }
+    //删除指定key的数据
+    @Override
+    public void del(String string) {
+        Jedis jedis = jedisPool.getResource();
+        jedis.del(string);
+        jedis.close();
+    }
+
+    //TODO 购物车操作
+    //添加订单项至购物车
+    @Override
+    public void addBasket(String key, String value) {
+        Jedis jedis = jedisPool.getResource();
+        jedis.set(key, value);
+        jedis.close();
+    }
+
+    //得到某用户的购物车
+    @Override
+    public String getBasket(String key) {
+        Jedis jedis = jedisPool.getResource();
+        String s = jedis.get(key);
+        jedis.close();
+        return s;
+    }
+    //判断是否存在key
+    @Override
+    public boolean existsKeys(String string) {
+        Jedis jedis = jedisPool.getResource();
+        Boolean exists = jedis.exists(string);
+        jedis.close();
+        return exists;
     }
 
 
