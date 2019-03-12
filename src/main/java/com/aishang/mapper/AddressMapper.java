@@ -28,4 +28,6 @@ public interface AddressMapper {
     void updateAddress(Address address);
     // 删除地址
     void delAddress(Integer aid);
+    //设置默认地址
+    void updateAddressState(Address address);
 }

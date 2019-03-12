@@ -3,6 +3,8 @@ package com.aishang.service.impl;
 import com.aishang.dao.RedisDao;
 import com.aishang.mapper.*;
 import com.aishang.po.*;
+import com.aishang.service.CategorySecondService;
+import com.aishang.service.CategoryService;
 import com.aishang.service.OrderService;
 import com.aishang.util.JsonUtils;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,10 @@ public class OrderServiceImpl implements OrderService {
     private PayMapper payMapper;
     @Resource
     private RedisDao redisDao;
-
+    @Resource
+    private CategoryService categoryService;
+    @Resource
+    private CategorySecondService categorySecondService;
 
 
     //根据用户ID获得地址集合
@@ -80,10 +85,10 @@ public class OrderServiceImpl implements OrderService {
         if(orderMapper.getOrderByOrderNumber(orderExt.getOrderNumber()).size()==0) {
             //添加订单
             orderExt.setPayId(0);
+            orderExt.setState(0);
             orderMapper.addOrder(orderExt);
             //获取oid
             Integer oid = orderMapper.getOid(orderExt);
-            System.out.println(oid+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             // 添加订单项
             for (OrderItemExt orderItemExt : orderExt.getOrderItemExtsList()) {
                 orderItemExt.setOid(oid);
@@ -140,6 +145,25 @@ public class OrderServiceImpl implements OrderService {
             flag=true;
         }
         return flag;
+    }
+    //返回以state字段为四种订单状态所定义的map集合
+    @Override
+    public Map<Long,List<OrderExt>> getOrderGroupMap() {
+        Map<Long,List<OrderExt>> orderGroupMap = new HashMap<Long,List<OrderExt>>();
+        for (Integer i=0;i<4;i++){
+            List<OrderExt> orderExtList= orderMapper.getOrderByState(i);
+            for (OrderExt orderExt:orderExtList) {
+                List<OrderItemExt> orderItemList = orderItemMapper.getOrderitemListByOid(orderExt.getOid());
+                orderExt.setOrderItemExtsList(orderItemList);
+                for (OrderItemExt orderItemExt:orderItemList) {
+                    Product product = productMapper.getProductByID(orderItemExt.getPid());
+                    orderItemExt.setProduct(product);
+                }
+            }
+            orderGroupMap.put(i.longValue(),orderExtList);
+        }
+
+        return orderGroupMap;
     }
 
     //TODO 购物车操作
@@ -211,5 +235,75 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+
+    //TODO 类目查询操作
+    // 返回一级类目列表
+    @Override
+    public List<Category> findCategoryAll() {
+        return categoryService.findAll();
+    }
+
+    // 返回二级类目CategorySecondExt列表其中包括该类目下的三级类目
+    @Override
+    public List<CategorySecondExt> findCategorySecondExtAllByCid(Integer cid) {
+        return categorySecondService.findAllByCid(cid);
+    }
+
+    // 获取二级类目map<cid,categorySecondList>集合
+    @Override
+    public Map<Integer, List<CategorySecondExt>> categorySecondMap(List<Category> categoryList) {
+        Map<Integer, List<CategorySecondExt>> categorySecondMap = new HashMap<Integer, List<CategorySecondExt>>();
+        for (Category category : categoryList) {
+            List<CategorySecondExt> categorySecondList = findCategorySecondExtAllByCid(category.getCid());
+            categorySecondMap.put(category.getCid(), categorySecondList);
+        }
+        return categorySecondMap;
+    }
+
+
+    //TODO 订单管理
+
+    // 删除订单
+    @Override
+    public void delOrder(List<String> oidList) {
+        for (String oid:oidList) {
+            if(oid!=null&&!"".equals(oid.trim())){
+                orderMapper.delOrder(Integer.parseInt(oid));
+                orderItemMapper.delOrderItem(Integer.parseInt(oid));
+            }
+
+        }
+    }
+
+    //根据用户id和支付密码判断是否存在该账户
+    @Override
+    public boolean checkFirmProduct(OrderExt orderExt, String bankPass) {
+        Integer a = payMapper.checkFirmProduct(orderExt.getUid(),bankPass);
+
+        if(a>0){
+            orderMapper.updatePayIDByOid(orderExt);
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    //分页查询历史订单
+    @Override
+    public List<OrderExt> getOrderPageBeanList(OrderBean orderBean) {
+        // 得到该用户的订单总数
+        orderBean.setTotalCount(orderMapper.getTotalCount(orderBean));
+        // 返回历史订单集合
+        List<OrderExt> orderPageBeanList = orderMapper.getOrderPageBeanList(orderBean);
+        for (OrderExt orderExt : orderPageBeanList) {
+            List<OrderItemExt> orderitemListByOid = orderItemMapper.getOrderitemListByOid(orderExt.getOid());
+            for (OrderItemExt orderItemExt : orderitemListByOid) {
+                Product productByID = productMapper.getProductByID(orderItemExt.getPid());
+                orderItemExt.setProduct(productByID);
+            }
+            orderExt.setOrderItemExtsList(orderitemListByOid);
+        }
+        return orderPageBeanList;
+    }
 
 }

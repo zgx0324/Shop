@@ -14,4 +14,6 @@ public interface PayMapper {
     Integer checkAccount(String bankAccount);
     // 检查是否支付成功
     Integer checkPay(Pay pay);
+    //根据用户id和支付密码判断是否存在该账户
+    Integer checkFirmProduct(Integer uid, String bankPass);
 }

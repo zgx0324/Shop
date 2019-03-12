@@ -5,7 +5,7 @@
 <mapper namespace="com.aishang.mapper.OrderMapper">
     <!-- 添加订单-->
     <insert id="addOrder" parameterType="OrderExt">
-        insert into orders values(default,#{orderNumber},#{total},#{aid},#{payId},#{date},#{uid},default)
+        insert into orders values(default,#{orderNumber},#{total},#{aid},#{payId},#{date},#{uid},#{state})
     </insert>
     <!--获取oid-->
     <select id="getOid" parameterType="OrderExt" resultType="Integer">
@@ -24,4 +24,30 @@
     <update id="updatePayIDByOid" parameterType="Order">
         update orders set pay_id=#{payId},state=#{state} where oid=#{oid}
     </update>
+    <!--返回以state字段为四种订单状态所定义的map集合-->
+    <select id="getOrderByState" parameterType="int" resultType="OrderExt">
+        select oid,order_number as orderNumber,uid,date,pay_id as payId,aid,total,state
+        from orders where state=#{state}
+    </select>
+
+    <!--删除订单-->
+    <delete id="delOrder" parameterType="Integer">
+        delete from orders where oid=#{oid}
+    </delete>
+
+    <!--分页查询oid-->
+    <select id="getOrderPageBeanList" parameterType="OrderBean" resultType="OrderExt">
+        select oid,order_number as orderNumber,uid,date,pay_id as payId,aid,total,state
+        from orders
+        where uid=#{orderExt.uid}
+        order by state asc,date desc
+        limit #{startIndex},#{pageSize}
+    </select>
+
+    <!--分页查询oid总数-->
+    <select id="getTotalCount" parameterType="OrderBean" resultType="Integer">
+        select count(0)
+        from orders
+        where uid=#{orderExt.uid}
+    </select>
 </mapper>

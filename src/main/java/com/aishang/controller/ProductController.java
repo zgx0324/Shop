@@ -34,7 +34,9 @@ public class ProductController {
 
         User user = (User) session.getAttribute("user");
 
+        if(user!=null){
         model.addAttribute("addressList",productService.getAddressAll(user.getUid()));//根据用户id向前台返回地址集合列表
+        }
         model.addAttribute("productDetail",productService.getProductByID(product.getPid()));//商品详情的product对象
         model.addAttribute("categoryList", productService.findCategoryAll());//一级类目集合
         model.addAttribute("categorySecondMap", productService.categorySecondMap(productService.findCategoryAll()));//二级类目Map<Integer,List<CategorySecondExt>>集合

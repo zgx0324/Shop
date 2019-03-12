@@ -285,11 +285,22 @@ $(document).ready(function() {
 	});
 
 	$(".img1").change(function(){
-		if($(this).val()){
-			var objUrl = gebjectURL(this.files[0]) ;
-			console.log("objUrl = "+objUrl) ;
-			var objUrl = gebjectURL(this.files[0]) ;
-			$(this).prev("img").attr("src",objUrl)
+		var filePath = $(this).val();
+		if (filePath != null && filePath != "") {
+			filePath = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+			if (filePath != ".png" && filePath != ".jpg" && filePath != ".jpeg"
+				&& filePath != ".gif" && filePath != "") {
+				alert('上传错误,文件格式必须为：png/jpg/jpeg/gif');
+				$(this).val("");
+				return;
+			} else {
+				if ($(this).val()) {
+					var objUrl = gebjectURL(this.files[0]);
+					console.log("objUrl = " + objUrl);
+					var objUrl = gebjectURL(this.files[0]);
+					$(this).prev("img").attr("src", objUrl)
+				}
+			}
 		}
 	})
 	

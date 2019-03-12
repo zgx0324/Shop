@@ -14,19 +14,26 @@
         <association property="user" javaType="com.aishang.domain.User">
     </resultMap>-->
     <select id="doLogin" resultType="User">
-        SELECT uid,username userName,password passWord,date,name,tel,email
+        SELECT uid,username as userName,password as passWord,date,name,tel,email,icon_path as iconPath,sex,age
         FROM user
         where username=#{0}
         and password=#{1}
     </select>
     <select id="findUserName" resultType="User">
-        SELECT uid,username userName,password passWord,date,name,tel,email
+        SELECT uid,username as userName,password as passWord,date,name,tel,email
         FROM user
         where username=#{userName}
     </select>
     <insert id="addUser" parameterType="User">
         insert into user
-        values (default,#{userName},#{passWord},#{date},default ,#{tel},default )
+        values (default,#{userName},#{passWord},#{date},default ,#{tel},default,default,default,default )
     </insert>
+
+    <update id="updateUser" parameterType="User">
+        update user
+        set username=#{userName},password=#{passWord},name=#{name},
+            tel=#{tel},email=#{email},icon_path=#{iconPath},age=#{age},sex=#{sex}
+        where uid=#{uid}
+    </update>
 
 </mapper>

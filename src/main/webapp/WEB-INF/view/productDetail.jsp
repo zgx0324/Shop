@@ -18,6 +18,77 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jQuery.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/zhonglin.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/zhongling2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/show-login.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style-1.css">
+    <script type="text/javascript">
+        $(function () {
+            if("${user}"==""){
+                $("#personal").attr("href","javascript:showDialog()")
+                $("#basket").attr("href","javascript:showDialog()")
+                $("#myorder").attr("href","javascript:showDialog()")
+            }
+            var loginPass = $("[name='loginPass']");
+            var loginName = $("[name='loginName']");
+            var arr = document.cookie.split("; ");
+            var name = "";
+            var pass="";
+            for (var i = 0; i < arr.length; i++) {
+                var arr2 = arr[i].split("=");
+                if (arr2[0] == "userName") {
+                    name = decodeURI(arr2[1]);
+                    loginName.val(name);
+                }
+                if (arr2[0] == "passWord") {
+                    pass = decodeURI(arr2[1]);
+                    loginPass.val(pass);
+                }
+
+            }
+
+            $("#loginName").blur(function() {
+                if (loginName.val() == '') {
+                    loginName.val(name);
+                }
+            });
+            $("#loginPass").blur(function() {
+                if (loginPass.val() == '') {
+                    loginPass.val(pass);
+                }
+            });
+            $("#login").click(function () {
+                var remember=null;
+                if($("[name='remember']").attr("checked")=="checked"){
+                    remember="remember";
+                }
+                if(loginPass.val().trim()!="" && loginName.val().trim()!=""){
+                    $.ajax({
+                        url:"${pageContext.request.contextPath}/ajaxDoLogin.do",
+                        data:{
+                            remember:remember,
+                            userName:loginName.val(),
+                            passWord:loginPass.val(),
+                        },
+                        success:function (data) {
+                            if(data=="ok"){
+                                alert("登陆成功请重新操作")
+                                $("#mask").hide();
+                                $("#dialogMove").hide();
+                                $("#personal").attr("href","${pageContext.request.contextPath}/user/personal.do")
+                                $("#basket").attr("href","${pageContext.request.contextPath}/order/toBasket.do")
+                                $("#myorder").attr("href","${pageContext.request.contextPath}/order/toMyOrder.do")
+                                location.reload();
+                            }else{
+                                alert("登录失败")
+                            }
+                        }
+                    })
+                }else{
+                    alert("请填写用户名及密码")
+                }
+            })
+        })
+    </script>
     <script type="text/javascript">
         $(function () {
             var num=1;
@@ -37,12 +108,20 @@
         $(function () {
             //立即购买
             $("#btn1").click(function () {
-                $("#productForm").attr("action","${pageContext.request.contextPath}/order/firmOrder.do");
-                $("#productForm").submit();
+                if("${user}"==""){
+                    showDialog();
+                }else{
+                    $("#productForm").attr("action","${pageContext.request.contextPath}/order/firmOrder.do");
+                    $("#productForm").submit();
+                }
+
             })
             //加入购物车
             $("#btn2").click(function () {
-               $.ajax({
+                if("${user}"==""){
+                    showDialog();
+                }else{
+                    $.ajax({
                    url:"${pageContext.request.contextPath}/order/addBasket.do",
                    data:{
                        pid:"${productDetail.pid}",
@@ -59,6 +138,7 @@
 
                    }
                })
+                }
             })
             //
             $("#btn3").click(function () {
@@ -73,12 +153,14 @@
 <div class="zl-header">
     <div class="zl-hd w1200">
         <p class="hd-p1 f-l">
-            Hi!您好，欢迎来到宅客微购，请登录  <a href="注册.html">【免费注册】</a>
+            Hi!您好，欢迎来到宅客微购，请<a href="${pageContext.request.contextPath}/login.do">登录</a>
+            <a href="${pageContext.request.contextPath}/register.do">【免费注册】</a>
         </p>
         <p class="hd-p2 f-r">
-            <a href="index.html">返回首页 (个人中心)</a><span>|</span>
-            <a href="购物车.html">我的购物车</a><span>|</span>
-            <a href="我的订单.html">我的订单</a>
+            <a href="${pageContext.request.contextPath}/aishang/index.do">返回首页</a><span>|</span>
+            <a href="${pageContext.request.contextPath}/user/personal.do" id="personal">个人中心</a><span>|</span>
+            <a href="${pageContext.request.contextPath}/order/toBasket.do" id="basket">我的购物车</a><span>|</span>
+            <a href="${pageContext.request.contextPath}/order/toMyOrder.do" id="myorder">我的订单</a>
         </p>
         <div style="clear:both;"></div>
     </div>
@@ -88,7 +170,7 @@
 <div class="logo-search w1200">
     <div class="logo-box f-l">
         <div class="logo f-l">
-            <a href="index.html" title="中林logo"><img src="${pageContext.request.contextPath}/images/zl2-01.gif" /></a>
+            <a href="index.html" title="中林logo"><img src="${pageContext.request.contextPath}/images/zl2-01.gif"/></a>
         </div>
         <div class="shangjia f-l">
             <a href="JavaScript:;" class="shangjia-a1">[ 切换城市 ]</a>
@@ -97,143 +179,37 @@
                 <div class="sl-city-top">
                     <p class="f-l">切换城市</p>
                     <a class="close-select-city f-r" href="JavaScript:;">
-                        <img src="${pageContext.request.contextPath}/images/close-select-city.gif" />
+                        <img src="${pageContext.request.contextPath}/images/close-select-city.gif"/>
                     </a>
                 </div>
-                <div class="sl-city-con">
-                    <p>西北</p>
-                    <dl>
-                        <dt>重庆市</dt>
-                        <dd>
-                            <a href="JavaScript:;">长寿区</a>
-                            <a href="JavaScript:;">巴南区</a>
-                            <a href="JavaScript:;">南岸区</a>
-                            <a href="JavaScript:;">九龙坡区</a>
-                            <a href="JavaScript:;">沙坪坝区</a>
-                            <a href="JavaScript:;">北碚</a>
-                            <a href="JavaScript:;">江北区</a>
-                            <a href="JavaScript:;">渝北区</a>
-                            <a href="JavaScript:;">大渡口区</a>
-                            <a href="JavaScript:;">渝中区</a>
-                            <a href="JavaScript:;">万州</a>
-                            <a href="JavaScript:;">武隆</a>
-                            <a href="JavaScript:;">晏家</a>
-                            <a href="JavaScript:;">长寿湖</a>
-                            <a href="JavaScript:;">云集</a>
-                            <a href="JavaScript:;">华中</a>
-                            <a href="JavaScript:;">林封</a>
-                            <a href="JavaScript:;">双龙</a>
-                            <a href="JavaScript:;">石回</a>
-                            <a href="JavaScript:;">龙凤呈祥</a>
-                            <a href="JavaScript:;">朝天门</a>
-                            <a href="JavaScript:;">中华</a>
-                            <a href="JavaScript:;">玉溪</a>
-                            <a href="JavaScript:;">云烟</a>
-                            <a href="JavaScript:;">红塔山</a>
-                            <a href="JavaScript:;">真龙</a>
-                            <a href="JavaScript:;">天子</a>
-                            <a href="JavaScript:;">娇子</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>新疆</dt>
-                        <dd>
-                            <a href="JavaScript:;">齐乌鲁木</a>
-                            <a href="JavaScript:;">昌吉</a>
-                            <a href="JavaScript:;">巴音</a>
-                            <a href="JavaScript:;">郭楞</a>
-                            <a href="JavaScript:;">伊犁</a>
-                            <a href="JavaScript:;">阿克苏</a>
-                            <a href="JavaScript:;">喀什</a>
-                            <a href="JavaScript:;">哈密</a>
-                            <a href="JavaScript:;">克拉玛依</a>
-                            <a href="JavaScript:;">博尔塔拉</a>
-                            <a href="JavaScript:;">吐鲁番</a>
-                            <a href="JavaScript:;">和田</a>
-                            <a href="JavaScript:;">石河子</a>
-                            <a href="JavaScript:;">克孜勒苏</a>
-                            <a href="JavaScript:;">阿拉尔</a>
-                            <a href="JavaScript:;">五家渠</a>
-                            <a href="JavaScript:;">图木舒克</a>
-                            <a href="JavaScript:;">库尔勒</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>甘肃</dt>
-                        <dd>
-                            <a href="JavaScript:;">兰州</a>
-                            <a href="JavaScript:;">天水</a>
-                            <a href="JavaScript:;">巴音</a>
-                            <a href="JavaScript:;">白银</a>
-                            <a href="JavaScript:;">庆阳</a>
-                            <a href="JavaScript:;">平凉</a>
-                            <a href="JavaScript:;">酒泉</a>
-                            <a href="JavaScript:;">张掖</a>
-                            <a href="JavaScript:;">武威</a>
-                            <a href="JavaScript:;">定西</a>
-                            <a href="JavaScript:;">金昌</a>
-                            <a href="JavaScript:;">陇南</a>
-                            <a href="JavaScript:;">临夏</a>
-                            <a href="JavaScript:;">嘉峪关</a>
-                            <a href="JavaScript:;">甘南</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>宁夏</dt>
-                        <dd>
-                            <a href="JavaScript:;">银川</a>
-                            <a href="JavaScript:;">吴忠</a>
-                            <a href="JavaScript:;">石嘴山</a>
-                            <a href="JavaScript:;">中卫</a>
-                            <a href="JavaScript:;">固原</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
-                    <dl>
-                        <dt>青海</dt>
-                        <dd>
-                            <a href="JavaScript:;">西宁</a>
-                            <a href="JavaScript:;">海西</a>
-                            <a href="JavaScript:;">海北</a>
-                            <a href="JavaScript:;">果洛</a>
-                            <a href="JavaScript:;">海东</a>
-                            <a href="JavaScript:;">黄南</a>
-                            <a href="JavaScript:;">玉树</a>
-                            <a href="JavaScript:;">海南</a>
-                        </dd>
-                        <div style="clear:both;"></div>
-                    </dl>
+                <div class="sl-city-con" style="height: 400px;overflow: auto">
+                    <c:forEach items="${regionList}" var="region">
+                        <dl>
+                            <dt>${region.regionName}</dt>
+                            <dd>
+                                <c:forEach items="${regionMap[region.regionName]}" var="city">
+                                    <a href="JavaScript:;">${city.regionName}</a>
+                                </c:forEach>
+                            </dd>
+                            <div style="clear:both;"></div>
+                        </dl>
+                    </c:forEach>
                 </div>
             </div>
         </div>
         <div style="clear:both;"></div>
     </div>
     <div class="erweima f-r">
-        <a href="JavaScript:;"><img src="${pageContext.request.contextPath}/images/zl2-04.gif" /></a>
+        <a href="JavaScript:;"><img src="${pageContext.request.contextPath}/images/zl2-04.gif"/></a>
     </div>
     <div class="search f-r">
         <div class="search-info">
-            <input type="text" placeholder="请输入商品名称" />
-            <button>搜索</button>
+            <form action="${pageContext.request.contextPath}/aishang/searchProduct.do" method="post">
+                <input type="text" name="selectpName" placeholder="请输入商品名称" value="${productBean.selectpName}"/>
+                <button>搜索</button>
+            </form>
             <div style="clear:both;"></div>
         </div>
-        <ul class="search-ul">
-            <li><a href="JavaScript:;">绿豆</a></li>
-            <li><a href="JavaScript:;">大米</a></li>
-            <li><a href="JavaScript:;">驱蚊</a></li>
-            <li><a href="JavaScript:;">洗面奶</a></li>
-            <li><a href="JavaScript:;">格力空调</a></li>
-            <li><a href="JavaScript:;">洗发</a></li>
-            <li><a href="JavaScript:;">护发</a></li>
-            <li><a href="JavaScript:;">葡萄</a></li>
-            <li><a href="JavaScript:;">脉动</a></li>
-            <li><a href="JavaScript:;">海鲜</a></li>
-            <li><a href="JavaScript:;">水产</a></li>
-            <div style="clear:both;"></div>
-        </ul>
     </div>
     <div style="clear:both;"></div>
 </div>
@@ -378,9 +354,8 @@
                 <div style="clear:both;"></div>
             </dl>
             <div class="dt-ifm-box4">
-                <button class="btn1" id="btn1">立即购买</button>
+                <button class="btn1" id="btn1" type="button" >立即购买</button>
                 <button class="btn2" id="btn2" type="button">加入购物车</button>
-                <button class="btn3" id="btn3">收藏</button>
             </div>
         </div>
         </form>
@@ -613,6 +588,32 @@
             <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-91.gif"/></a>
             <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-92.gif"/></a>
             <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-93.gif"/></a>
+        </div>
+    </div>
+</div>
+
+<!--登录弹窗-->
+<div class="ui-mask" id="mask" onselectstart="return false"></div>
+<div class="ui-dialog" id="dialogMove" onselectstart='return false;'>
+    <div class="ui-dialog-title" id="dialogDrag"  onselectstart="return false;" >
+        检测到您尚未登录
+        <a class="ui-dialog-closebutton" href="javascript:hideDialog();"></a>
+    </div>
+    <div class="ui-dialog-content">
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" type="input" placeholder="手机/邮箱/用户名" name="loginName" />
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-password" type="input" placeholder="密码" name="loginPass"/>
+        </div>
+        <div class="ui-dialog-l40">
+            <input type="checkbox" name="remember" value="remember"/>记住密码
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="#" id="login">登录</a>
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="${pageContext.request.contextPath}/register.do">立即注册</a>
         </div>
     </div>
 </div>

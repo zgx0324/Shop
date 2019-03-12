@@ -15,4 +15,9 @@
         where oid=#{oid}
     </select>
 
+    <!--删除订单项-->
+    <delete id="delOrderItem" parameterType="Integer">
+        delete from order_item where oid=#{oid}
+    </delete>
+
 </mapper>

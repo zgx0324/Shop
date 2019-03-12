@@ -17,6 +17,76 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jQuery.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/zhonglin.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/zhongling2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/show-login.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/htmleaf-demo.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style-1.css">
+    <script type="text/javascript">
+        $(function () {
+            if("${user}"==""){
+                $("#personal").attr("href","javascript:showDialog()")
+                $("#basket").attr("href","javascript:showDialog()")
+                $("#myorder").attr("href","javascript:showDialog()")
+            }
+            var loginPass = $("[name='loginPass']");
+            var loginName = $("[name='loginName']");
+            var arr = document.cookie.split("; ");
+            var name = "";
+            var pass="";
+            for (var i = 0; i < arr.length; i++) {
+                var arr2 = arr[i].split("=");
+                if (arr2[0] == "userName") {
+                    name = decodeURI(arr2[1]);
+                    loginName.val(name);
+                }
+                if (arr2[0] == "passWord") {
+                    pass = decodeURI(arr2[1]);
+                    loginPass.val(pass);
+                }
+
+            }
+
+            $("#loginName").blur(function() {
+                if (loginName.val() == '') {
+                    loginName.val(name);
+                }
+            });
+            $("#loginPass").blur(function() {
+                if (loginPass.val() == '') {
+                    loginPass.val(pass);
+                }
+            });
+            $("#login").click(function () {
+                var remember=null;
+                if($("[name='remember']").attr("checked")=="checked"){
+                    remember="remember";
+                }
+                if(loginPass.val().trim()!="" && loginName.val().trim()!=""){
+                    $.ajax({
+                        url:"${pageContext.request.contextPath}/ajaxDoLogin.do",
+                        data:{
+                            remember:remember,
+                            userName:loginName.val(),
+                            passWord:loginPass.val(),
+                        },
+                        success:function (data) {
+                            if(data=="ok"){
+                                alert("登陆成功请重新操作")
+                                $("#mask").hide();
+                                $("#dialogMove").hide();
+                                $("#personal").attr("href","${pageContext.request.contextPath}/user/personal.do")
+                                $("#basket").attr("href","${pageContext.request.contextPath}/order/toBasket.do")
+                                $("#myorder").attr("href","${pageContext.request.contextPath}/order/toMyOrder.do")
+                            }else{
+                                alert("登录失败")
+                            }
+                        }
+                    })
+                }else{
+                    alert("请填写用户名及密码")
+                }
+            })
+        })
+    </script>
     <script type="text/javascript">
         $(function () {
             $("[name='bankAccount']").change(function () {
@@ -50,6 +120,7 @@
                         payPass=payPass+$("#pass"+i).val();
                     }
                 }
+                alert(payPass)
                 if(flag){
                     alert("密码为6位数字请检查")
                 }else if($('input:radio[name="hobby"]:checked').val()==null){
@@ -70,12 +141,14 @@
 <div class="zl-header">
     <div class="zl-hd w1200">
         <p class="hd-p1 f-l">
-            Hi!您好，欢迎来到宅客微购，请登录 <a href="注册.html">【免费注册】</a>
+            Hi!您好，欢迎来到宅客微购，请<a href="${pageContext.request.contextPath}/login.do">登录</a>
+            <a href="${pageContext.request.contextPath}/register.do">【免费注册】</a>
         </p>
         <p class="hd-p2 f-r">
-            <a href="index.html">返回首页 (个人中心)</a><span>|</span>
-            <a href="购物车.html">我的购物车</a><span>|</span>
-            <a href="我的订单.html">我的订单</a>
+            <a href="${pageContext.request.contextPath}/aishang/index.do">返回首页</a><span>|</span>
+            <a href="${pageContext.request.contextPath}/user/personal.do" id="personal">个人中心</a><span>|</span>
+            <a href="${pageContext.request.contextPath}/order/toBasket.do" id="basket">我的购物车</a><span>|</span>
+            <a href="${pageContext.request.contextPath}/order/toMyOrder.do" id="myorder">我的订单</a>
         </p>
         <div style="clear:both;"></div>
     </div>
@@ -119,27 +192,16 @@
     </div>
     <div class="search f-r">
         <div class="search-info">
-            <input type="text" placeholder="请输入商品名称"/>
-            <button>搜索</button>
+            <form action="${pageContext.request.contextPath}/aishang/searchProduct.do" method="post">
+                <input type="text" name="selectpName" placeholder="请输入商品名称" value="${productBean.selectpName}"/>
+                <button>搜索</button>
+            </form>
             <div style="clear:both;"></div>
         </div>
-        <ul class="search-ul">
-            <li><a href="JavaScript:;">绿豆</a></li>
-            <li><a href="JavaScript:;">大米</a></li>
-            <li><a href="JavaScript:;">驱蚊</a></li>
-            <li><a href="JavaScript:;">洗面奶</a></li>
-            <li><a href="JavaScript:;">格力空调</a></li>
-            <li><a href="JavaScript:;">洗发</a></li>
-            <li><a href="JavaScript:;">护发</a></li>
-            <li><a href="JavaScript:;">葡萄</a></li>
-            <li><a href="JavaScript:;">脉动</a></li>
-            <li><a href="JavaScript:;">海鲜</a></li>
-            <li><a href="JavaScript:;">水产</a></li>
-            <div style="clear:both;"></div>
-        </ul>
     </div>
     <div style="clear:both;"></div>
 </div>
+
 
 <!--内容开始-->
 <div class="payment-interface w1200">
@@ -292,6 +354,32 @@
             <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-91.gif"/></a>
             <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-92.gif"/></a>
             <a href="#"><img src="${pageContext.request.contextPath}/images/zl2-93.gif"/></a>
+        </div>
+    </div>
+</div>
+
+<!--登录弹窗-->
+<div class="ui-mask" id="mask" onselectstart="return false"></div>
+<div class="ui-dialog" id="dialogMove" onselectstart='return false;'>
+    <div class="ui-dialog-title" id="dialogDrag"  onselectstart="return false;" >
+        检测到您尚未登录
+        <a class="ui-dialog-closebutton" href="javascript:hideDialog();"></a>
+    </div>
+    <div class="ui-dialog-content">
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-username" type="input" placeholder="手机/邮箱/用户名" name="loginName" />
+        </div>
+        <div class="ui-dialog-l40 ui-dialog-pt15">
+            <input class="ui-dialog-input ui-dialog-input-password" type="input" placeholder="密码" name="loginPass"/>
+        </div>
+        <div class="ui-dialog-l40">
+            <input type="checkbox" name="remember" value="remember"/>记住密码
+        </div>
+        <div>
+            <a class="ui-dialog-submit" href="#" id="login">登录</a>
+        </div>
+        <div class="ui-dialog-l40">
+            <a href="${pageContext.request.contextPath}/register.do">立即注册</a>
         </div>
     </div>
 </div>

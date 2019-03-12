@@ -5,6 +5,7 @@ import com.aishang.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -73,6 +74,44 @@ public class DoLogin {
             return "redirect:/aishang/index.do";
         }else { //----------------------------登录失败,返回login页
             return "redirect:login.do?msg=error";
+        }
+
+    }
+
+    @RequestMapping("/ajaxDoLogin")
+    @ResponseBody
+    public String ajaxDoLogin(User user,String remember,HttpServletResponse response) {
+        // 调用userService方法验证用户登录信息返回值为User对象
+        User user1= userService.doLogin(user.getUserName(), user.getPassWord());
+        // 若User对象不为空意为登陆成功跳转index页，否则为登陆失败返回登录页
+        if(user1!=null){ //----------------------------登录成功
+            // 创建session
+            session.setAttribute("user",user1);
+            // 创建cookie
+            Cookie cookie1 = null;
+            Cookie cookie2 = null;
+            if (remember != null) {
+                cookie1 = new Cookie("userName",user1.getUserName());
+                cookie2 = new Cookie("passWord",user1.getPassWord());
+                cookie1.setMaxAge(60*60*24*7);
+                cookie2.setMaxAge(60*60*24*7);
+                cookie1.setPath("/");
+                cookie2.setPath("/");
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
+            }else{
+                cookie1 = new Cookie("userName",user1.getUserName());
+                cookie2 = new Cookie("passWord",user1.getPassWord());
+                cookie1.setMaxAge(0);
+                cookie2.setMaxAge(0);
+                cookie1.setPath("/");
+                cookie2.setPath("/");
+                response.addCookie(cookie1);
+                response.addCookie(cookie2);
+            }
+           return "ok";
+        }else { //----------------------------登录失败,返回login页
+             return "fail";
         }
 
     }

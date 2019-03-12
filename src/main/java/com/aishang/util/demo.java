@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.io.File;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +24,13 @@ import java.util.regex.Pattern;
 public class demo {
     @Test
     public void fun3(){
-        System.out.println(new Date().toString());
+        File file = new File("F:\\Shop\\target\\Shop\\images\\fileImages\\2019\\3\\7\\38eb5cfe415644659d6118bd617233ab_Koala.jpg");
+        if (file.exists()) {
+            file.delete();
+            System.out.println("dui ");
+        }else{
+            System.out.println("cuo ");
+        }
     }
 
     @Test

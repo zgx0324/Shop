@@ -1,12 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2019/3/11
+  Time: 15:09
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>注册</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>购买记录</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/shopping-mall-index.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jQuery.js"></script>
@@ -82,130 +87,6 @@
             })
         })
     </script>
-    <script type="text/javascript">
-        var telCode=null;
-        //前台表单验证
-        $(function () {
-            $("#sub").click(function(){
-            var flag = true;
-
-            // 声明表单变量
-            var userName = $("[name='userName']");
-            var passWord = $("[name='passWord']");
-            var doPassWord = $("[name='doPassWord']");
-            var imageCode = $("[name='imageCode']");
-
-            // 校验用户名
-                if(userName.val().trim()==""){
-                    $("#checkUerName").attr("class", "cuo");
-                    $("#checkUerName").html("");
-                    $("#checkUerName").append("用户名不可为空");
-                    flag=false;
-                }else{
-                    $.ajax({
-                        url: "${pageContext.request.contextPath}/user/checkUserName.do?userName=" + userName.val(),
-                        success: function (data) {
-                            if (data == "true") {
-                                $("#checkUerName").attr("class", "dui");
-                                $("#checkUerName").html("");
-                            } else {
-                                $("#checkUerName").attr("class", "cuo");
-                                $("#checkUerName").html("");
-                                $("#checkUerName").append("用户名已存在");
-                                flag=false;
-                            }
-                        }
-                    })
-                }
-
-
-            // 校验密码
-                var num = /\d/
-                var letter = /[a-zA-Z]/
-                var symbol = /[^a-zA-Z0-9]/
-                if(!num.test(passWord.val())||!letter.test(passWord.val())||!symbol.test(passWord.val())||passWord.val().trim()==""||6 > passWord.val().length||passWord.val().length>16){
-                    $("#checkPassWord").html("");
-                    $("#checkPassWord").attr("class","cuo");
-                    $("#checkPassWord").append("密码由6-16的字母、数字、符号组成");
-                    flag=false;
-                }else{
-                    $("#checkPassWord").html("");
-                    $("#checkPassWord").attr("class", "dui");
-                }
-
-            //  确认密码校验
-                if(doPassWord.val()==passWord.val() && doPassWord.val().trim()!=""){
-                    $("#checkDoPassWord").html("");
-                    $("#checkDoPassWord").attr("class", "dui");
-                }else{
-                    $("#checkDoPassWord").html("");
-                    $("#checkDoPassWord").attr("class", "cuo");
-                    $("#checkDoPassWord").append("密码不一致，请重新输入");
-                    flag=false;
-                }
-
-            //校验图形验证码是否正确
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/doValidate.do?code=" + imageCode.val(),
-                    success: function (data) {
-                        if (data == "true") {
-                            $("#checkImageCode").html("");
-                            $("#checkImageCode").attr("class", "dui");
-                        } else {
-                            $("#checkImageCode").html("");
-                            $("#checkImageCode").attr("class", "cuo");
-                            $("#checkImageCode").append("验证码输入错误，请重新输入");
-                            flag=false;
-                        }
-                    }
-                })
-
-                // 校验电话号
-                if(!/^1[3-9]\d{9}$/.test($("[name='tel']").val())){
-                    $("#checkTel").html("");
-                    $("#checkTel").attr("class", "cuo");
-                    $("#checkTel").append("手机号格式不正确");
-                    flag=false;
-                }
-                // 校验手机验证码
-
-                if (!(telCode == $("[name='telCode']").val() && telCode != null)) {
-                    $("#checkTelCode").html("");
-                    $("#checkTelCode").attr("class", "cuo");
-                    $("#checkTelCode").append("短信验证码错误");
-                    flag=false;
-                }
-
-                 if(!flag){
-                    alert("您有未填写信息请检查");
-                }else if($("[name='hobby']").attr("checked")!="checked"){
-                     alert("请勾选网站服务协议");
-                 }else{
-                    $("#from").submit();
-                }
-
-            });
-        });
-        $(function () {
-            $("#messageCode").click(function () {
-                if(/^1[3-9]\d{9}$/.test($("[name='tel']").val())){
-                   $.ajax({
-                        url: "${pageContext.request.contextPath}/tel.do?tel="+$("[name='tel']").val(),
-                        success: function (data) {
-                            telCode=data;
-                        }
-                    })
-                }
-
-            })
-        })
-        // 更换验证码图片
-        $(function(){
-            $("#changePic").click(function () {
-                $("#codeImg").attr("src","${pageContext.request.contextPath}/validate.do");
-            })
-        })
-    </script>
 </head>
 
 <body>
@@ -274,56 +155,181 @@
     <div style="clear:both;"></div>
 </div>
 
+<!--nav-->
+<div class="nav-box">
+    <div class="nav-kuai w1200">
+        <div class="nav-kuaijie yjp-hover1 f-l">
+            <a href="JavaScript:;" class="kj-tit1">商品分类快捷</a>
+            <div class="kuaijie-box yjp-show1" style="display:none;">
+                <c:forEach items="${categoryList}" var="category">
+                    <div class="kuaijie-info">
+                        <dl class="kj-dl1">
+                            <dt><img src="${pageContext.request.contextPath}/images/zl2-07.gif"/><a
+                                    href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCid=${category.cid}">${category.cname}</a>
+                            </dt>
+                            <dd>
+                                <c:forEach items="${categorySecondMap[category.cid]}" var="categorySecond"
+                                           varStatus="vs">
+                                    <a href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCsid=${categorySecond.csid}">${categorySecond.csname}</a><c:if
+                                        test="${!vs.last}"><span>|</span></c:if>
+                                </c:forEach>
+                            </dd>
+                        </dl>
+                        <div class="kuaijie-con">
+                            <c:forEach items="${categorySecondMap[category.cid]}" var="categorySecond">
+                                <dl class="kj-dl2">
+                                    <dt>
+                                        <a href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCsid=${categorySecond.csid}">${categorySecond.csname}</a>
+                                    </dt>
+                                    <dd>
+                                        <c:forEach items="${categorySecond.categoryThirdList}" var="categoryThird"
+                                                   varStatus="vs">
+                                            <a href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCtid=${categoryThird.ctid}">${categoryThird.ctname}</a><c:if
+                                                test="${!vs.last}"><span>|</span></c:if>
+                                        </c:forEach>
+                                    </dd>
+                                </dl>
+                            </c:forEach>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
 
 <!--内容开始-->
-<div class="password-con registered">
-    <form id="from" action="${pageContext.request.contextPath}/registerSubmit.do" method="post">
-        <div class="psw">
-            <p class="psw-p1">用户名</p>
-            <input type="text" placeholder="请输入用户名" name="userName"/>
-            <span id="checkUerName">${nameError}</span>
+<div class="personal w1200">
+    <div class="personal-left f-l">
+        <div class="personal-l-tit">
+            <h3>个人中心</h3>
         </div>
-        <div class="psw">
-            <p class="psw-p1">输入密码</p>
-            <input type="text" placeholder="请输入密码" name="passWord" />
-            <span id="checkPassWord">${passError}</span>
+        <ul>
+            <li class="per-li2"><a href="${pageContext.request.contextPath}/user/personal.do">个人资料<span>></span></a></li>
+            <li class="per-li3"><a href="${pageContext.request.contextPath}/order/toMyOrder.do">我的订单<span>></span></a></li>
+            <li class="per-li5"><a href="${pageContext.request.contextPath}/order/toBasket.do">购物车<span>></span></a></li>
+            <li class="per-li6"><a href="${pageContext.request.contextPath}/order/toManagerAddress.do">管理收货地址<span>></span></a></li>
+            <li class="current-li per-li8"><a href="${pageContext.request.contextPath}/order/toGetOrderAll.do">购买记录<span>></span></a></li>
+        </ul>
+    </div>
+    <div class="purchase-records f-r">
+        <div class="pr-tit">
+            <P class="pr-p1">宝贝</P>
+            <P class="pr-p2">单价(元)</P>
+            <P class="pr-p3">数量</P>
+            <P class="pr-p4">实付款(元)</P>
+            <P class="pr-p5">交易状态</P>
+            <P class="pr-p6">交易操作</P>
         </div>
-        <div class="psw">
-            <p class="psw-p1">确认密码</p>
-            <input type="text" placeholder="请再次确认密码" name="doPassWord"/>
-            <span id="checkDoPassWord"></span>
-        </div>
-        <div class="psw psw2">
-            <p class="psw-p1">手机号</p>
-            <input type="text" placeholder="请输入手机号" name="tel"/>
-            <button id="messageCode" type="button">获取短信验证码</button>
-            <span id="checkTel">${telError}</span>
-        </div>
-        <div class="psw psw3">
-            <p class="psw-p1">验证码</p>
-            <input type="text" placeholder="请输入手机验证码" name="telCode"/>
-            <span id="checkTelCode"></span>
-        </div>
-        <div class="psw psw3">
-            <p class="psw-p1">验证码</p>
-            <input type="text" placeholder="请输入验证码" name="imageCode"/>
-            <span id="checkImageCode"></span>
-        </div>
-        <div class="yanzhentu">
-            <div class="yz-tu f-l">
-                <img id="codeImg" src="${pageContext.request.contextPath}/validate.do"/>
+        <c:forEach items="${orderExtList}" var="orderExt">
+            <div class="pr-info">
+                <div class="pr-tit2">
+                    <input type="checkbox" value="" name="hobby"></input>
+                    <p class="pr-p1">${orderExt.date}</p>
+                    <p class="pr-p2">订单号：${orderExt.orderNumber}</p>
+                    <a class="pr-a2" href="#">删除</a>
+                </div>
+                <c:forEach items="${orderExt.orderItemExtsList}" var="orderItemExt">
+                    <div class="pr-con">
+                        <div class="pr-con-tu f-l">
+                            <a href="#"><img src="${pageContext.request.contextPath}/images/dai1.gif" /></a>
+                        </div>
+                        <a class="pr-con-bt f-l" href="#">${orderItemExt.product.pName}</a>
+                        <div class="pr-con-sz1 f-l">
+                            <span>${orderItemExt.product.shopPrice}</span>
+                            <p>${orderItemExt.product.marketPrice}</p>
+                        </div>
+                        <p class="pr-con-sl f-l">${orderItemExt.count}</p>
+                        <div class="pr-con-yf f-l">
+                            <p>${orderItemExt.subTotal}</p>
+                            <span>(含运费：0.00 )</span>
+                        </div>
+                        <div class="pr-con-jiaoyi f-l">
+                            <a href="#">${map[orderExt.state]}</a>
+                        </div>
+                        <div class="pr-con-pj f-l">
+                            <a href="#">评价</a>
+                            <a href="#">再次购买</a>
+                        </div>
+
+                        <div style="clear:both;"></div>
+                    </div>
+                </c:forEach>
             </div>
-            <p class="f-l">看不清？<a id="changePic" href="javascript:(0)">换张图</a></p>
+
+        </c:forEach>
+
+
+        <!--分页-->
+        <div class="paging">
+            <c:if test="${orderBean.pageCount==0}"><br/><br/><span
+                    style="font-size: xx-large">对不起，您搜索的商品不存在...</span></c:if>
+            <div class="pag-left f-l">
+                <c:if test="${orderBean.pageNow!=1}">
+                    <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=1" class="about left-l f-l" style="font-size: 3px;background:#FFFFFF;color: #1D1D1D;">首页</a>
+                    <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=${orderBean.pageNow-1}"class="about left-r f-l"><</a>
+                </c:if>
+                <ul class="left-m f-l">
+                    <c:if test="${orderBean.pageNow<=3}">
+                        <c:if test="${orderBean.pageCount<5}">
+                            <c:forEach begin="1" end="${orderBean.pageCount}" step="1"
+                                       varStatus="vs" var="i">
+                                <li class="${orderBean.pageNow==vs.index?"current":""}">
+                                <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=${orderBean.pageNow-1}">${vs.index}</a>
+                            </c:forEach></li>
+                        </c:if>
+                        <c:if test="${orderBean.pageCount>=5}">
+                            <c:forEach begin="1" end="5" step="1" varStatus="vs" var="i">
+                                <li class="${orderBean.pageNow==vs.index?"current":""}">
+                                    <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=${vs.count}">${vs.count}</a>
+                                </li>
+                            </c:forEach>
+                        </c:if>
+                    </c:if>
+                    <c:if test="${orderBean.pageNow>3 && orderBean.pageNow<orderBean.pageCount-2}">
+                        <c:forEach begin="${orderBean.pageNow-2}" end="${orderBean.pageNow+2}" step="1"
+                                   varStatus="vs">
+                            <li class="${orderBean.pageNow==vs.index?"current":""}">
+                                <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=${vs.index}">${vs.index}</a>
+                            </li>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${orderBean.pageNow>=orderBean.pageCount-2&&orderBean.pageNow <= orderBean.pageCount&&orderBean.pageNow>3}">
+                        <c:forEach begin="${orderBean.pageNow-2}" end="${orderBean.pageCount}" step="1"
+                                   varStatus="vs">
+                            <li class="${orderBean.pageNow==vs.index?"current":""}">
+                                <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=${vs.index}">${vs.index}</a>
+                            </li>
+                        </c:forEach>
+                    </c:if>
+                    <div style="clear:both;"></div>
+                </ul>
+                <c:if test="${orderBean.pageNow!=orderBean.pageCount&&orderBean.pageCount>1}">
+                    <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=${orderBean.pageNow+1}" class="about left-l f-l">></a>
+                    <a href="${pageContext.request.contextPath}/order/toGetOrderAll.do?pageNow=${orderBean.pageCount}" class="about left-l f-l" style="font-size: 3px;background: #FFFFFF ;color: #1D1D1D;">尾页</a>
+                </c:if>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="pag-right f-l">
+                <c:if test="${orderBean.pageCount>1}">
+                    <form action="${pageContext.request.contextPath}/order/toGetOrderAll.do"
+                          method="post">
+                        <div class="jump-page f-l">
+                            到第<input type="number" name="pageNow" step="1" min="1" max="${orderBean.pageCount}"/>页
+                        </div>
+                        <button class="f-l" type="submit">确定</button>
+                        <div style="clear:both;"></div>
+                    </form>
+                </c:if>
+            </div>
             <div style="clear:both;"></div>
         </div>
-        <div class="agreement">
-            <input type="checkbox" name="hobby" value="hobby"></input>
-            <p>我有阅读并同意<span>《宅客微购网站服务协议》</span></p>
-        </div>
-        <button class="psw-btn" id="sub" type="button">立即注册</button>
-    </form>
-    <p class="sign-in">已有账号？请<a href="${pageContext.request.contextPath}/login.do">登录</a></p>
+    </div>
+    <div style="clear:both;"></div>
 </div>
+
 
 <!--底部一块-->
 <div class="footer-box">
@@ -429,7 +435,6 @@
     </div>
 </div>
 
-
 <!--登录弹窗-->
 <div class="ui-mask" id="mask" onselectstart="return false"></div>
 <div class="ui-dialog" id="dialogMove" onselectstart='return false;'>
@@ -456,6 +461,6 @@
     </div>
 </div>
 
-
 </body>
 </html>
+

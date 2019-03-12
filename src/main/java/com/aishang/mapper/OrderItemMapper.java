@@ -16,4 +16,6 @@ public interface OrderItemMapper {
     void addOrderItem (OrderItemExt orderItemExt);
     // 根据订单ID查询订单项集合
     List<OrderItemExt> getOrderitemListByOid(Integer oid);
+    //删除订单项
+    void delOrderItem(int parseInt);
 }

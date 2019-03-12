@@ -6,32 +6,38 @@
 
     <!--根据用户id查询地址集合-->
     <select id="getAddressAll" parameterType="Integer" resultType="Address">
-        select aid,tel,addr,date,uid,name
+        select aid,tel,addr,date,uid,name,state
         from address
         where uid=#{uid}
+        order by state desc
     </select>
 
-    <!--根据地址id查询地址集合-->
+    <!--根据地址id查询地址-->
     <select id="getAddressByAid" parameterType="Integer" resultType="Address">
-        select aid,tel,addr,date,uid,name
+        select aid,tel,addr,date,uid,name,state
         from address
         where aid=#{aid}
     </select>
 
     <!--添加地址-->
     <insert id="addAddress" parameterType="Address">
-        insert into address values (default ,#{name},#{tel},#{addr},default ,#{date},#{uid})
+        insert into address values (default ,#{name},#{tel},#{addr},#{state},#{date},#{uid})
     </insert>
 
     <!--查询刚刚添加的地址-->
     <select id="getAddressByUntil" resultType="Address" parameterType="address">
-        select aid,tel,addr,date,uid,name
+        select aid,tel,addr,date,uid,name,state
         from address
         where name=#{name} and tel=#{tel} and addr=#{addr} and uid=#{uid}
     </select>
     <!--修改地址信息-->
     <update id="updateAddress" parameterType="Address">
         update address set name=#{name},tel=#{tel},addr=#{addr} where aid=#{aid}
+    </update>
+
+    <!--设置默认地址-->
+    <update id="updateAddressState" parameterType="Address">
+        update address set state=#{state} where aid=#{aid}
     </update>
 
     <!--删除地址-->

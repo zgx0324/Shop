@@ -15,6 +15,7 @@ public class Order {
     private Integer payId;
     private String date;
     private Integer uid;
+    private Integer state;
 
     public Integer getState() {
         return state;
@@ -23,10 +24,6 @@ public class Order {
     public void setState(Integer state) {
         this.state = state;
     }
-
-    private Integer state;
-
-
     public Integer getOid() {
         return oid;
     }

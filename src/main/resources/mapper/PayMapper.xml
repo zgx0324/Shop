@@ -12,4 +12,7 @@
         select pay_id as payId from pay where bank_account=#{bankAccount} and bank_pass=#{bankPass}
     </select>
 
+    <select id="checkFirmProduct" resultType="Integer">
+        select count(0) from pay where uid=#{0} and bank_pass=#{1}
+    </select>
 </mapper>

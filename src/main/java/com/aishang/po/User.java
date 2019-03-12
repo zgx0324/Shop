@@ -3,13 +3,40 @@ package com.aishang.po;
 import java.util.Date;
 
 public class User {
-    Integer uid;
-    String userName;
-    String passWord;
-    Date date;
-    String name;
-    String tel;
-    String email;
+    private Integer uid;
+    private String userName;
+    private String passWord;
+    private Date date;
+    private String name;
+    private String tel;
+    private String email;
+    private String sex;
+    private String iconPath;
+    private Integer age;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
     public Integer getUid() {
         return uid;

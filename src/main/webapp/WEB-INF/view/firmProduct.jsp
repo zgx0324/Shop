@@ -1,12 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2019/3/10
+  Time: 9:41
+  To change this template use File | Settings | File Templates.
+  确认收货
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>注册</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的订单(确认收货)</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/shopping-mall-index.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jQuery.js"></script>
@@ -83,132 +90,42 @@
         })
     </script>
     <script type="text/javascript">
-        var telCode=null;
-        //前台表单验证
         $(function () {
-            $("#sub").click(function(){
-            var flag = true;
-
-            // 声明表单变量
-            var userName = $("[name='userName']");
-            var passWord = $("[name='passWord']");
-            var doPassWord = $("[name='doPassWord']");
-            var imageCode = $("[name='imageCode']");
-
-            // 校验用户名
-                if(userName.val().trim()==""){
-                    $("#checkUerName").attr("class", "cuo");
-                    $("#checkUerName").html("");
-                    $("#checkUerName").append("用户名不可为空");
-                    flag=false;
-                }else{
+            $("#sub").click(function () {
+                var pass1=$("#pass1").val();
+                var pass2=$("#pass2").val();
+                var pass3=$("#pass3").val();
+                var pass4=$("#pass4").val();
+                var pass5=$("#pass5").val();
+                var pass6=$("#pass6").val();
+                if(pass1!=""&&pass2!=""&&pass3!=""&&pass4!=""&&pass5!=""&&pass6!=""){
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/user/checkUserName.do?userName=" + userName.val(),
-                        success: function (data) {
-                            if (data == "true") {
-                                $("#checkUerName").attr("class", "dui");
-                                $("#checkUerName").html("");
-                            } else {
-                                $("#checkUerName").attr("class", "cuo");
-                                $("#checkUerName").html("");
-                                $("#checkUerName").append("用户名已存在");
-                                flag=false;
+                        url:"${pageContext.request.contextPath}/order/checkFirmProduct.do",
+                        data:{
+                            bankPass:pass1+pass2+pass3+pass4+pass5+pass6,
+                            oid:"${orderExt.oid}",
+                            uid:"${orderExt.uid}",
+                        },
+                        success:function (data) {
+                            if(data=="ok"){
+                                setTimeout(function(){//两秒后跳转
+                                    alert("  收货成功  ");
+                                    location.href = "${pageContext.request.contextPath}/order/toMyOrder.do";
+                                },1000);
+                            }else{
+                                alert("密码输入错误")
                             }
                         }
                     })
                 }
 
-
-            // 校验密码
-                var num = /\d/
-                var letter = /[a-zA-Z]/
-                var symbol = /[^a-zA-Z0-9]/
-                if(!num.test(passWord.val())||!letter.test(passWord.val())||!symbol.test(passWord.val())||passWord.val().trim()==""||6 > passWord.val().length||passWord.val().length>16){
-                    $("#checkPassWord").html("");
-                    $("#checkPassWord").attr("class","cuo");
-                    $("#checkPassWord").append("密码由6-16的字母、数字、符号组成");
-                    flag=false;
-                }else{
-                    $("#checkPassWord").html("");
-                    $("#checkPassWord").attr("class", "dui");
-                }
-
-            //  确认密码校验
-                if(doPassWord.val()==passWord.val() && doPassWord.val().trim()!=""){
-                    $("#checkDoPassWord").html("");
-                    $("#checkDoPassWord").attr("class", "dui");
-                }else{
-                    $("#checkDoPassWord").html("");
-                    $("#checkDoPassWord").attr("class", "cuo");
-                    $("#checkDoPassWord").append("密码不一致，请重新输入");
-                    flag=false;
-                }
-
-            //校验图形验证码是否正确
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/doValidate.do?code=" + imageCode.val(),
-                    success: function (data) {
-                        if (data == "true") {
-                            $("#checkImageCode").html("");
-                            $("#checkImageCode").attr("class", "dui");
-                        } else {
-                            $("#checkImageCode").html("");
-                            $("#checkImageCode").attr("class", "cuo");
-                            $("#checkImageCode").append("验证码输入错误，请重新输入");
-                            flag=false;
-                        }
-                    }
-                })
-
-                // 校验电话号
-                if(!/^1[3-9]\d{9}$/.test($("[name='tel']").val())){
-                    $("#checkTel").html("");
-                    $("#checkTel").attr("class", "cuo");
-                    $("#checkTel").append("手机号格式不正确");
-                    flag=false;
-                }
-                // 校验手机验证码
-
-                if (!(telCode == $("[name='telCode']").val() && telCode != null)) {
-                    $("#checkTelCode").html("");
-                    $("#checkTelCode").attr("class", "cuo");
-                    $("#checkTelCode").append("短信验证码错误");
-                    flag=false;
-                }
-
-                 if(!flag){
-                    alert("您有未填写信息请检查");
-                }else if($("[name='hobby']").attr("checked")!="checked"){
-                     alert("请勾选网站服务协议");
-                 }else{
-                    $("#from").submit();
-                }
-
-            });
-        });
-        $(function () {
-            $("#messageCode").click(function () {
-                if(/^1[3-9]\d{9}$/.test($("[name='tel']").val())){
-                   $.ajax({
-                        url: "${pageContext.request.contextPath}/tel.do?tel="+$("[name='tel']").val(),
-                        success: function (data) {
-                            telCode=data;
-                        }
-                    })
-                }
-
-            })
-        })
-        // 更换验证码图片
-        $(function(){
-            $("#changePic").click(function () {
-                $("#codeImg").attr("src","${pageContext.request.contextPath}/validate.do");
             })
         })
     </script>
 </head>
 
-<body>
+<body style="position:relative;">
+
 <!--header-->
 <div class="zl-header">
     <div class="zl-hd w1200">
@@ -274,55 +191,134 @@
     <div style="clear:both;"></div>
 </div>
 
+<!--nav-->
+<div class="nav-box">
+    <div class="nav-kuai w1200">
+        <div class="nav-kuaijie yjp-hover1 f-l">
+            <a href="JavaScript:;" class="kj-tit1">商品分类快捷</a>
+            <div class="kuaijie-box yjp-show1" style="display:none;">
+                <c:forEach items="${categoryList}" var="category">
+                    <div class="kuaijie-info">
+                        <dl class="kj-dl1">
+                            <dt><img src="${pageContext.request.contextPath}/images/zl2-07.gif"/><a
+                                    href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCid=${category.cid}">${category.cname}</a>
+                            </dt>
+                            <dd>
+                                <c:forEach items="${categorySecondMap[category.cid]}" var="categorySecond"
+                                           varStatus="vs">
+                                    <a href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCsid=${categorySecond.csid}">${categorySecond.csname}</a><c:if
+                                        test="${!vs.last}"><span>|</span></c:if>
+                                </c:forEach>
+                            </dd>
+                        </dl>
+                        <div class="kuaijie-con">
+                            <c:forEach items="${categorySecondMap[category.cid]}" var="categorySecond">
+                                <dl class="kj-dl2">
+                                    <dt>
+                                        <a href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCsid=${categorySecond.csid}">${categorySecond.csname}</a>
+                                    </dt>
+                                    <dd>
+                                        <c:forEach items="${categorySecond.categoryThirdList}" var="categoryThird"
+                                                   varStatus="vs">
+                                            <a href="${pageContext.request.contextPath}/aishang/searchProduct.do?selectCtid=${categoryThird.ctid}">${categoryThird.ctname}</a><c:if
+                                                test="${!vs.last}"><span>|</span></c:if>
+                                        </c:forEach>
+                                    </dd>
+                                </dl>
+                            </c:forEach>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+</div>
 
 <!--内容开始-->
-<div class="password-con registered">
-    <form id="from" action="${pageContext.request.contextPath}/registerSubmit.do" method="post">
-        <div class="psw">
-            <p class="psw-p1">用户名</p>
-            <input type="text" placeholder="请输入用户名" name="userName"/>
-            <span id="checkUerName">${nameError}</span>
+<div class="personal w1200">
+    <div class="personal-left f-l">
+        <div class="personal-l-tit">
+            <h3>个人中心</h3>
         </div>
-        <div class="psw">
-            <p class="psw-p1">输入密码</p>
-            <input type="text" placeholder="请输入密码" name="passWord" />
-            <span id="checkPassWord">${passError}</span>
-        </div>
-        <div class="psw">
-            <p class="psw-p1">确认密码</p>
-            <input type="text" placeholder="请再次确认密码" name="doPassWord"/>
-            <span id="checkDoPassWord"></span>
-        </div>
-        <div class="psw psw2">
-            <p class="psw-p1">手机号</p>
-            <input type="text" placeholder="请输入手机号" name="tel"/>
-            <button id="messageCode" type="button">获取短信验证码</button>
-            <span id="checkTel">${telError}</span>
-        </div>
-        <div class="psw psw3">
-            <p class="psw-p1">验证码</p>
-            <input type="text" placeholder="请输入手机验证码" name="telCode"/>
-            <span id="checkTelCode"></span>
-        </div>
-        <div class="psw psw3">
-            <p class="psw-p1">验证码</p>
-            <input type="text" placeholder="请输入验证码" name="imageCode"/>
-            <span id="checkImageCode"></span>
-        </div>
-        <div class="yanzhentu">
-            <div class="yz-tu f-l">
-                <img id="codeImg" src="${pageContext.request.contextPath}/validate.do"/>
+        <ul>
+            <li class="per-li2"><a href="${pageContext.request.contextPath}/user/personal.do">个人资料<span>></span></a>
+            </li>
+            <li class="per-li3"><a href="${pageContext.request.contextPath}/order/toMyOrder.do">我的订单<span>></span></a>
+            </li>
+            <li class="per-li5"><a href="${pageContext.request.contextPath}/order/toBasket.do">购物车<span>></span></a>
+            </li>
+            <li class="current-li per-li6"><a href="${pageContext.request.contextPath}/order/toManagerAddress.do">管理收货地址<span>></span></a>
+            </li>
+            <li class="per-li8"><a
+                    href="${pageContext.request.contextPath}/order/toGetOrderAll.do">购买记录<span>></span></a></li>
+        </ul>
+    </div>
+    <div class="f-r">
+        <div class="confirmation">
+            <div class="in-tit">
+                <h3>商品信息</h3>
             </div>
-            <p class="f-l">看不清？<a id="changePic" href="javascript:(0)">换张图</a></p>
-            <div style="clear:both;"></div>
+            <c:forEach items="${orderExt.orderItemExtsList}" var="orderItem">
+                <div class="commodity" style="border-bottom:0;">
+                <div class="matong f-l">
+                    <a href="#"><img src="${pageContext.request.contextPath}/images/in-matong.gif" /></a>
+                </div>
+                <div class="com-con f-l">
+                    <h3>${orderItem.product.pName}</h3>
+                    <dl>
+                        <dt>送货至</dt>
+                        <dd>${fn:split(address.addr,"-")[0]}（包邮）</dd>
+                        <div style="clear:both;"></div>
+                    </dl>
+                    <dl>
+                        <dt>数量</dt>
+                        <dd><span class="sp2">X ${orderItem.count}</span></dd>
+                        <div style="clear:both;"></div>
+                    </dl>
+                    <dl>
+                        <dt>价格</dt>
+                        <dd><span class="sp2">¥${orderItem.subTotal}</span></dd>
+                        <div style="clear:both;"></div>
+                    </dl>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+            </c:forEach>
         </div>
-        <div class="agreement">
-            <input type="checkbox" name="hobby" value="hobby"></input>
-            <p>我有阅读并同意<span>《宅客微购网站服务协议》</span></p>
+        <div class="confirmation">
+            <div class="in-tit">
+                <h3>订单信息</h3>
+            </div>
+            <div class="odr-cf">
+                <p>收货信息： ${fn:split(address.addr,"-")[0]} ${fn:split(address.addr,"-")[1]} ${fn:split(address.addr,"-")[2]}， ${address.name}， ${address.tel}</p>
+                <p>成交时间：${orderExt.date}</p>
+                <p>订单号：${orderExt.orderNumber}</p>
+            </div>
         </div>
-        <button class="psw-btn" id="sub" type="button">立即注册</button>
-    </form>
-    <p class="sign-in">已有账号？请<a href="${pageContext.request.contextPath}/login.do">登录</a></p>
+        <div class="confirmation"  id="content">
+            <div class="in-tit">
+                <h3>确认收货</h3>
+            </div>
+            <div class="odr-sh">
+                <P class="reminder">温馨提示：请收到货后，再确认收货！否则您可能钱货两空！</P>
+                <div class="zfb">
+                    <P class="zfmm">支付宝支付密码：</P>
+                    <input type="text" style="border-left:1px solid #E5E5E5;" id="pass1" onKeyUp="value=value.replace(/\D/g,'')" onchange="value=value.replace(/\D/g,'')" maxlength="1"/>
+                    <input type="text" id="pass2" onKeyUp="value=value.replace(/\D/g,'')" onchange="value=value.replace(/\D/g,'')" maxlength="1"/>
+                    <input type="text" id="pass3" onKeyUp="value=value.replace(/\D/g,'')" onchange="value=value.replace(/\D/g,'')" maxlength="1"/>
+                    <input type="text" id="pass4" onKeyUp="value=value.replace(/\D/g,'')" onchange="value=value.replace(/\D/g,'')" maxlength="1"/>
+                    <input type="text" id="pass5" onKeyUp="value=value.replace(/\D/g,'')" onchange="value=value.replace(/\D/g,'')" maxlength="1"/>
+                    <input type="text" id="pass6" onKeyUp="value=value.replace(/\D/g,'')" onchange="value=value.replace(/\D/g,'')" maxlength="1"/>
+                    <input type="hidden" name="bankPass"/>
+                    <p class="shuzi">请输入6位数字支付密码</p>
+                    <button class="zfb-btn" id="sub">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
 </div>
 
 <!--底部一块-->
@@ -455,7 +451,6 @@
         </div>
     </div>
 </div>
-
-
 </body>
 </html>
+

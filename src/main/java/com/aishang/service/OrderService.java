@@ -50,7 +50,8 @@ public interface OrderService {
     // 检查是否支付成功
     boolean checkPay(Pay pay,Integer withoutPayOid,Integer uid);
 
-
+    //返回以state字段为四种订单状态所定义的map集合
+    Map<Long,List<OrderExt>> getOrderGroupMap();
     //TODO 购物车操作
 
     //添加至购物车
@@ -59,4 +60,23 @@ public interface OrderService {
     List<OrderItemExt> getBasket(String s);
     //删除购物车商品集合列表
     void delBasket(List<String> pidList, String key);
+
+
+    // TODO 类目查询
+    // 返回一级类目列表的函数
+    List<Category> findCategoryAll();
+
+    // 返回二级类目列表扩展类的函数
+    List<CategorySecondExt> findCategorySecondExtAllByCid(Integer cid);
+
+    // 获取二级类目map<cid,categorySecondList>集合
+    Map<Integer, List<CategorySecondExt>> categorySecondMap(List<Category> categoryList);
+
+    // 删除订单
+    void delOrder(List<String> oidList);
+
+    //根据用户id和支付密码判断是否存在该账户
+    boolean checkFirmProduct(OrderExt orderExt, String bankPass);
+    //分页查询历史订单
+    List<OrderExt> getOrderPageBeanList(OrderBean orderBean);
 }

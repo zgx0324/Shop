@@ -27,7 +27,7 @@ public class Pagebean {
     public Integer getPageSize() {
         return pageSize;
     }
-
+    public void setPageSize(Integer pageSize){ this.pageSize=pageSize;}
 
     public Integer getPageCount() {
         return pageCount;

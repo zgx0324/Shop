@@ -411,7 +411,7 @@
 .order-hd dd h3 a{ font-size:13px; color:#000;}
 .order-hd dd p{font-size:13px; color:#000;}
 .order-hd .ord-dai{height:92px;}
-.order-hd .ord-dai p{ display:inline-block; line-height:92px; font-size:13px; color:#000; margin-right:70px;}
+.order-hd .ord-dai button{ display:inline-block; font-size:13px; height:30px;color:#000; margin-top:25px;margin-right:70px;}
 .order-hd .ord-dai span{ font-size:13px; color:#E90000; margin-left:10px;}
 
 .order-md{border:1px solid #E0E0E0;}
